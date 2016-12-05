@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
 #Env value for installer location
-ENV insloc ../bins
 
 # Dependencies Start ~~
 	#Env variables java 7
@@ -18,8 +17,8 @@ ENV insloc ../bins
 	RUN mkdir /opt/maven
 
 	#Copy Require Binary
-	COPY ${insloc}/${java_archive} /opt/java
-	COPY ${insloc}/${mvn_archive} /opt/maven
+	COPY ./${java_archive} /opt/java
+	COPY ./${mvn_archive} /opt/maven
 
 	#Setup Java
 	WORKDIR /opt/java

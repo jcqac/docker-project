@@ -1,8 +1,6 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env value for installer location
-ENV insloc ../bins
 
 #Env value for tomcat archive
 ENV tcat-archive apache-tomcat-9.0.0.M13.tar.gz
@@ -13,7 +11,7 @@ ENV tcat-folder apache-tomcat-9.0.0.M13
 	RUN mkdir /opt/tomcat
 
 	#Copy required files
-	COPY ${insloc}/${tcat-archive} /opt/tomcat
+	COPY ./${tcat-archive} /opt/tomcat
 #Dependencies End ~~
 
 #Setup TomCat ~~

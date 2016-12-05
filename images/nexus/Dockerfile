@@ -1,9 +1,6 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env value for installer location
-ENV insloc ../bins
-
 #Env value for nexus archive
 ENV nex-archive nexus-3.1.0-04-unix.tar.gz
 ENV nex-folder nexus-3.1.0-04
@@ -13,7 +10,7 @@ ENV nex-folder nexus-3.1.0-04
 	RUN mkdir /opt/nexus
 
 	#Copy required files
-	COPY ${insloc}/${nex-archive} /opt/nexus
+	COPY ./${nex-archive} /opt/nexus
 #Dependencies End ~~
 
 #Setup Nexus ~~

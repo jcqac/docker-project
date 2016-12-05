@@ -2,7 +2,6 @@ FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
 #Env value for installer location
-ENV insloc ../bins
 
 #Env value for jira installer
 ENV jira-installer atlassian-jira-software-7.2.4-x64.bin
@@ -12,7 +11,7 @@ ENV jira-installer atlassian-jira-software-7.2.4-x64.bin
 	RUN mkdir /opt/atlassian/jira
 
 	#Copy required files
-	COPY ${insloc}/${jira-installer} /opt/atlassian/jira
+	COPY ./${jira-installer} /opt/atlassian/jira
 #Dependencies End ~~
 
 #Setup Jira ~~

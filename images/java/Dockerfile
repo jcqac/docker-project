@@ -1,9 +1,6 @@
 FROM ubuntu:16.04
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env value for installer location
-ENV insloc ../bins
-
 #Env variables for java
 ENV java_archive jdk-8u112-linux-x64.tar.gz
 ENV java_folder jdk1.8.0_112
@@ -12,7 +9,7 @@ ENV java_folder jdk1.8.0_112
 RUN mkdir /opt/java
 
 #Copy Require Binary
-COPY ${insloc}/${java_archive} /opt/java
+COPY ./${java_archive} /opt/java
 
 #Setup Java
 WORKDIR /opt/java

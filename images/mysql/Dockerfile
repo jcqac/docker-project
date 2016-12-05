@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
 #Env value for installer location
-ENV insloc ../bins
 
 #Env value for mysql installer
 ENV mysql-installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
@@ -24,7 +23,7 @@ ENV mysql-installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 	RUN apt-get install -y python3
 
 	#Copy required files
-	COPY ${insloc}/${mysql-installer} /opt/mysql
+	COPY ./${mysql-installer} /opt/mysql
 #Dependencies End ~~
 
 #Setup MySQL ~~
