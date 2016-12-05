@@ -37,7 +37,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	WORKDIR /opt/maven
 	RUN tar -xvzf ${mvn_archive}
 	
-	RUN mv ./${java_folder} ./m2
+	RUN mv ./${mvn_folder} ./m2
 	
 	RUN update-alternatives --install /usr/bin/mvn mvn /opt/maven/m2/bin/mvn 100
 	RUN update-alternatives --display mvn
