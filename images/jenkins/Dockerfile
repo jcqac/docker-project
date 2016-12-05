@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
 #Env value for installer location
@@ -9,16 +9,14 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	ENV mvn_folder apache-maven-3.3.9
 
 	#Setup required folders
-	RUN mkdir /opt/java
 	RUN mkdir /opt/maven
 
 	#Copy Require Binary
-	COPY ./${java_archive} /opt/java
 	COPY ./${mvn_archive} /opt/maven
 
 	#Setup Java (JRE 7)
 	RUN apt-get update
-	RUN apt-get install -y java7-runtime-headless
+	RUN apt-get install -y openjdk-8-jre-headless
 
 	#Setup Maven
 	WORKDIR /opt/maven
