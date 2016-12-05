@@ -8,6 +8,7 @@ ENV jira-installer atlassian-jira-software-7.2.4-x64.bin
 
 #Dependencies Start ~~
 	#Setup required folders
+	RUN mkdir /opt/atlassian/
 	RUN mkdir /opt/atlassian/jira
 
 	#Copy required files
