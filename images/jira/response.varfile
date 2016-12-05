@@ -1,7 +1,7 @@
 #install response file for jira
 portChoice=custom
-httpPort$Long=8081
-rmiPort$Long=8006
+httpPort$Long=8082
+rmiPort$Long=8007
 app.install.service$Boolean=true
 existingInstallationDir=/opt/atlassian/jira
 sys.installationDir=/opt/atlassian/jira
