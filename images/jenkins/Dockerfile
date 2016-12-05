@@ -17,8 +17,8 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	COPY ./${mvn_archive} /opt/maven
 
 	#Setup Java (JRE 7)
-	RUN sudo apt-get update
-	RUN sudo apt-get install -y java7-runtime-headless
+	RUN apt-get update
+	RUN apt-get install -y java7-runtime-headless
 
 	#Setup Maven
 	WORKDIR /opt/maven
