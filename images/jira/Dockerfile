@@ -4,7 +4,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 #Env value for installer location
 
 #Env value for jira installer
-ENV jira-installer atlassian-jira-software-7.2.4-x64.bin
+ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 
 #Dependencies Start ~~
 	#Setup required folders
@@ -12,7 +12,7 @@ ENV jira-installer atlassian-jira-software-7.2.4-x64.bin
 	RUN mkdir /opt/atlassian/jira
 
 	#Copy required files
-	COPY ./${jira-installer} /opt/atlassian/jira
+	COPY ./${jira_installer} /opt/atlassian/jira
 #Dependencies End ~~
 
 #Setup Jira ~~
@@ -22,7 +22,7 @@ ENV jira-installer atlassian-jira-software-7.2.4-x64.bin
 	
 	#Setup Jira
 	WORKDIR /opt/atlassian/jira
-	RUN ./${jira-installer} -q -varfile ./reponse.varfile
+	RUN ./${jira_installer} -q -varfile ./reponse.varfile
 
 
 #Setup Jira end ~~
