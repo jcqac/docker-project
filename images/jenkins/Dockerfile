@@ -55,7 +55,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	WORKDIR /opt/jenkins
 	
 	#Copy Jenkins installer
-	COPY ../bins/${jenkins_installer} /opt/jenkins
+	COPY ./${jenkins_installer} /opt/jenkins
 	
 	#Install Jenkins
 	RUN dpkg -i ${jenkins_installer}
