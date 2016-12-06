@@ -27,6 +27,7 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	#Zabbix Dependencies - PHP & Apache2
 	RUN apt-get update
 	RUN apt-get install -y apache2 libapache2-mod-php php-bcmath php-mbstring php7.0-xml php-cli php-mcrypt php-mysql
+	RUN apt-get install -y libcurl3 libiksemel3 libodbc1 libopenipmi0 libsnmp30 libssh2-1 fping 
 # Dependencies setup end ~~
 
 # Start Zabbix setup ~~
