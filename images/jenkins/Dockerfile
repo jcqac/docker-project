@@ -40,6 +40,9 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 	#install net-tools
 	RUN apt-get install -y net-tools
+	
+	#install apt-utils
+	RUN apt-get install -y apt-utils
 
 # Dependencies end ~~
 
