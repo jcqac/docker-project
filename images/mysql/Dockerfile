@@ -51,7 +51,7 @@ EXPOSE 3306
 
 #Execute SQL statement to setup accounts and relavent tables.
 #Remove tmp folders
-ENTRYPOINT service mysql start && bash \
+ENTRYPOINT service mysql start\
 	mysql -sfu root --password=root < "post_install.sql"\
-	rm -rf /opt/mysql/tmp
+	rm -rf /opt/mysql/tmp && bash
 
