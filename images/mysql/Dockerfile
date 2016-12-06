@@ -46,14 +46,11 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 	
 	#Execute SQL statement to setup accounts and relavent tables.
 	WORKDIR /opt/mysql/tmp
-	RUN service mysql start
-	CMD mysql -sfu root --password=root < "post_install.sql"\
+	RUN service mysql start\
+	mysql -sfu root --password=root < "post_install.sql"\
+	rm -rf /opt/mysql/tmp
 	
-	#Remove tmp folders
 	WORKDIR /opt/mysql
-	RUN rm -rf /opt/mysql/tmp
-	
-	RUN service mysql stop
 	
 #Setup MySQL end ~~
 
