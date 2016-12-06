@@ -15,6 +15,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	COPY ./${mvn_archive} /opt/maven
 	
 	#install daemon
+	RUN apt-get update
 	RUN apt-get install -y daemon
 	
 	#install psmisc
@@ -27,7 +28,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	RUN apt-get install -y apt-utils
 	
 	#Setup Java (JRE 7)
-	RUN apt-get update
 	RUN apt-get install -y openjdk-8-jre-headless
 
 	#Setup Maven
