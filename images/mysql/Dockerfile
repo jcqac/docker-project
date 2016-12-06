@@ -4,7 +4,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 #Env value for installer location
 
 #Env value for mysql installer
-ENV mysql-installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
+ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 
 #Dependencies Start ~~
 	#Setup required folders
@@ -29,7 +29,7 @@ ENV mysql-installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 #Setup MySQL ~~
 	#Extract MySQL
 	WORKDIR /opt/mysql/
-	RUN tar -xvf ${mysql-installer}
+	RUN tar -xvf ${mysql_installer}
 
 	#preseed answers
 	RUN	echo mysql-community-server  mysql-community-server/root-pass password root | debconf-set-selections;\
