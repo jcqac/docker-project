@@ -57,13 +57,11 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	#Install Jenkins
 	RUN dpkg -i ${jenkins_installer}
 	
-	#Run Jenkins
-	RUN service jenkins start
-	
 # Install Jenkins end ~~
 	
 #Expose Jenkins' port
-
 EXPOSE 8080
 	
+#Run jenkins on start
+ENTRYPOINT service jenkins start && bash
 	
