@@ -14,8 +14,11 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	#Copy Require Binary
 	COPY ./${mvn_archive} /opt/maven
 	
-	#install daemon
+	#install apt-utils
 	RUN apt-get update
+	RUN apt-get install -y apt-utils
+	
+	#install daemon
 	RUN apt-get install -y daemon
 	
 	#install psmisc
@@ -23,9 +26,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 	#install net-tools
 	RUN apt-get install -y net-tools
-	
-	#install apt-utils
-	RUN apt-get install -y apt-utils
 	
 	#Setup Java (JRE 7)
 	RUN apt-get install -y openjdk-8-jre-headless
