@@ -7,23 +7,33 @@ ENV nex_folder nexus-3.1.0-04
 
 #Dependencies Start ~~
 	#Setup required folders
-	RUN mkdir /opt/nexus
+	#RUN mkdir /opt/nexus
 
 	#Copy required files
-	COPY ./${nex_archive} /opt/nexus
+	COPY ./${nex_archive} /opt
 #Dependencies End ~~
 
 #Setup Nexus ~~
 	
 	#Setup Nexus
-	WORKDIR /opt/nexus
+	WORKDIR /opt
 	RUN tar -xvzf ${nex_archive}
-	#RUN mv ./${nex_folder} ./nexus3
+	RUN mv ./${nex_folder} ./nexus
 
 #Setup Nexus end ~~
+	
+#Setup Nexus user
+RUN groupadd nexus
+	useradd -s /sbin/nologin -g nexus -d /path/to/nexus nexus
+	
+	
+# Install Nexus as a Service
+COPY ./nexus.service /etc/systemd/system/
+RUN systemctl daemon-reload &&\
+	systemctl enable nexus.service &&\
 	
 #Expose Nexus ports
 EXPOSE 8081
 
-ENTRYPOINT /opt/nexus/nexus-3.1.0-04/bin/nexus start && bash
+ENTRYPOINT systemctl start nexus.service
 
