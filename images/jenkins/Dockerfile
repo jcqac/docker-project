@@ -55,7 +55,10 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	RUN dpkg -i ${jenkins_installer}
 	
 	#Run Jenkins
-	RUN service start jenkins
+	RUN service jenkins start
+	
+	#Print initial password to console
+	RUN cat /var/lib/jenkins/secrets/initialAdminPassword
 # Install Jenkins end ~~
 	
 #Expose Jenkins' port
