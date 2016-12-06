@@ -29,7 +29,7 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 #Setup Jira ~~
 	#Setup Jira
 	WORKDIR /opt/atlassian/jira
-	RUN ./${jira_installer} -q -varfile reponse.varfile
+	RUN ./${jira_installer} -q -varfile /opt/atlassian/jira/reponse.varfile
 
 #Setup Jira end ~~
 
