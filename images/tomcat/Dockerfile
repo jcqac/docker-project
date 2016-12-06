@@ -14,7 +14,6 @@ ENV tcat_folder apache-tomcat-9.0.0.M13
 #Dependencies End ~~
 
 #Setup TomCat ~~
-	
 	#Setup TomCat
 	WORKDIR /opt/tomcat
 	RUN tar -xvzf ${tcat_archive}
@@ -25,11 +24,10 @@ ENV tcat_folder apache-tomcat-9.0.0.M13
 	RUN chmod 755 /etc/init.d/tomcat
 
 #Setup TomCat end ~~
-
-#Start TomCat
-	RUN /etc/init.d/tomcat start
 	
 #Expose TomCat ports
 EXPOSE 8080
 
+#Start TomCat
+ENTRYPOINT /etc/init.d/tomcat start && bash
 
