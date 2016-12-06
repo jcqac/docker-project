@@ -36,7 +36,7 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 		echo mysql-community-server  mysql-community-server/re-root-pass password root | debconf-set-selections;
 
 	#Install SQL Server community edition
-	WORKDIR /opt/
+	WORKDIR /opt
 	RUN DEBIAN_FRONTEND=noninteractive dpkg -R --install mysql/
 
 	#Execute SQL statement to setup accounts and relavent tables.

@@ -22,6 +22,7 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 	
 	#Setup Jira
 	WORKDIR /opt/atlassian/jira
+	RUN chmod a+x ./${jira_installer}
 	RUN ./${jira_installer} -q -varfile ./reponse.varfile
 
 
