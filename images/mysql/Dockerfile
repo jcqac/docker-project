@@ -39,19 +39,26 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 	WORKDIR /opt
 	RUN DEBIAN_FRONTEND=noninteractive dpkg -R --install mysql/
 
+	
+	
 	#Copy config over
 	COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 	
+	#Execute SQL statement to setup accounts and relavent tables.
 	WORKDIR /opt/mysql/tmp
+	RUN service mysql start
+	CMD mysql -sfu root --password=root < "post_install.sql"\
+	
+	#Remove tmp folders
+	WORKDIR /opt/mysql
+	RUN rm -rf /opt/mysql/tmp
+	
+	RUN service mysql stop
 	
 #Setup MySQL end ~~
 
 #Expose MySQL port
 EXPOSE 3306
 
-#Execute SQL statement to setup accounts and relavent tables.
-#Remove tmp folders
-ENTRYPOINT service mysql start\
-	mysql -sfu root --password=root < "post_install.sql"\
-	rm -rf /opt/mysql/tmp && bash
+ENTRYPOINT service mysql start && bash
 
