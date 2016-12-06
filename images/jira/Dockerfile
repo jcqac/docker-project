@@ -23,6 +23,7 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 	#RUN chmod a+x ./response.varfile
 	
 	## Test ##
+	RUN apt-get update
 	RUN apt-get install -y default-jdk
 	RUN apt-get install -y default-jre
 	
