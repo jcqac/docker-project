@@ -29,5 +29,5 @@ ENV tcat_folder apache-tomcat-9.0.0.M13
 EXPOSE 8080
 
 #Start TomCat
-ENTRYPOINT /etc/init.d/tomcat start && bash
+ENTRYPOINT /opt/tomcat/apache-tomcat/bin/startup.sh
 
