@@ -64,9 +64,9 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	
 	#This sets up default database for Zabbix
 	RUN service mysql start &&\
-		mysql -sfu zabbix --password=G4lacT1ca zabbix < "schema.sql" &&\
-		mysql -sfu zabbix --password=G4lacT1ca zabbix < "data.sql" &&\
-		mysql -sfu zabbix --password=G4lacT1ca zabbix < "images.sql" &&\
+		mysql zabbix -sfu zabbix --password=G4lacT1ca < "schema.sql" &&\
+		mysql zabbix -sfu zabbix --password=G4lacT1ca < "data.sql" &&\
+		mysql zabbix -sfu zabbix --password=G4lacT1ca < "images.sql" &&\
 		#service mysql stop
 		
 	# This is to set the timezone in php.ini for zabbix to work.
