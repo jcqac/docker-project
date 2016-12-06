@@ -32,7 +32,7 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	RUN apt-get install -y libcurl3 libiksemel3 libodbc1 libopenipmi0 libsnmp30 libssh2-1 fping 
 	
 	#zabbix frontend dependencies
-	RUN apt-get install -y php5-gd php-gd php5-ldap php-ldap ttf-dejavu-core ttf-japanese-gothic
+	RUN apt-get install -y php-gd php-ldap ttf-dejavu-core
 # Dependencies setup end ~~
 
 # Start Zabbix setup ~~
