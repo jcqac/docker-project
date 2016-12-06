@@ -14,13 +14,13 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 
 	#Setup required dependencies
 	RUN apt-get update
-	RUN apt-get install -y apt-utils
 	RUN apt-get install -y libaio1
 	RUN apt-get install -y libmecab2
 	RUN apt-get install -y perl
 	RUN apt-get install -y psmisc
 	RUN apt-get install -y python
 	RUN apt-get install -y python3
+	RUN apt-get install -y apt-utils
 
 	#Copy required files
 	COPY ./${mysql_installer} /opt/mysql
