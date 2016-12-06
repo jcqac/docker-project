@@ -21,12 +21,9 @@ ENV nex_folder nexus-3.1.0-04
 	#RUN mv ./${nex_folder} ./nexus3
 
 #Setup Nexus end ~~
-
-#Start TomCat
-	WORKDIR /opt/nexus/${nex_folder}
-	RUN nexus start
 	
 #Expose Nexus ports
 EXPOSE 8081
 
+ENTRYPOINT /opt/nexus/nexus-3.1.0-04/bin/nexus start && bash
 
