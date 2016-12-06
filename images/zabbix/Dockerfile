@@ -17,6 +17,7 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 		WORKDIR /opt/mysql/tmp
 		RUN service mysql start &&\
 		mysql -sfu root --password=root < "post_install.sql" &&\
+		service mysql stop &&\
 		rm -rf /opt/mysql/tmp
 		
 		WORKDIR /opt/mysql
@@ -57,7 +58,10 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 		
 	#This sets up default database for Zabbix
 	RUN service mysql start &&\
-		zcat /usr/share/zabbix-server-mysql/{schema,images,data}.sql.gz | mysql -u zabbix --password=G4lacT1ca
+		zcat /usr/share/zabbix-server-mysql/schema.sql.gz | mysql -u zabbix --password=G4lacT1ca &&\
+		zcat /usr/share/zabbix-server-mysql/images.sql.gz | mysql -u zabbix --password=G4lacT1ca &&\
+		zcat /usr/share/zabbix-server-mysql/data.sql.gz | mysql -u zabbix --password=G4lacT1ca &&\
+		service mysql stop
 		
 	# This is to set the timezone in php.ini for zabbix to work.
 	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ Europe\/London/' /etc/php/7.0/apache2/php.ini
@@ -75,5 +79,5 @@ EXPOSE 443
 #Expose Zabbix Port
 EXPOSE 10051
 
-#ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
-ENTRYPOINT bash
+ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
+#ENTRYPOINT bash
