@@ -1,11 +1,11 @@
-#install response file for jira
-portChoice=custom
-httpPort$Long=8082
+#install4j response file for JIRA 7.2.4
+#Tue Dec 11 10:12:39 UTC 2016
 rmiPort$Long=8007
 app.install.service$Boolean=true
 existingInstallationDir=/opt/atlassian/jira
-sys.installationDir=/opt/atlassian/jira
 sys.confirmedUpdateInstallationString=false
-executeLauncherAction$Boolean=true
 sys.languageId=en
-
+sys.installationDir=/opt/atlassian/jira
+executeLauncherAction$Boolean=true
+httpPort$Long=8082
+portChoice=custom

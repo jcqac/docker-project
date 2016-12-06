@@ -14,7 +14,6 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 	#Copy JIRA installer
 	COPY ./${jira_installer} /opt/atlassian/jira
 	
-	
 	#Copy Answer File
 	COPY response.varfile /opt/atlassian/jira
 	
