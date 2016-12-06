@@ -16,7 +16,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 	#install apt-utils
 	RUN apt-get update
-	RUN apt-get install -y apt-utils
+	#RUN apt-get install -y apt-utils
 	
 	#install daemon
 	RUN apt-get install -y daemon
