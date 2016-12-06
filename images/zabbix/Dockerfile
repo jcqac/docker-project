@@ -1,8 +1,8 @@
 FROM jc-sql-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-ENV zabsrv-installer zabbix-server-mysql_3.2.1-1+xenial_amd64.deb
-ENV zabfro-installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
+ENV zabsrv_installer zabbix-server-mysql_3.2.1-1+xenial_amd64.deb
+ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 
 
 #MySQL DB setup  ~~
@@ -33,13 +33,13 @@ ENV zabfro-installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	#make opt folder
 	RUN mkdir /opt/zabbix
 	#Copy Zabbix installers 
-	COPY ./${zabsrv-installer} /opt/zabbix
-	COPY ./${zabfro-installer} /opt/zabbix
+	COPY ./${zabsrv_installer} /opt/zabbix
+	COPY ./${zabfro_installer} /opt/zabbix
 	
 	#Install Zabbix debs
 	WORKDIR /opt/zabbix
-	RUN dpkg -i ${zabsrv-installer}
-	RUN dpkg -i ${zabfro-installer}
+	RUN dpkg -i ${zabsrv_installer}
+	RUN dpkg -i ${zabfro_installer}
 	
 	#This is to make zabbix run using php7 rather than relic php5
 	RUN service zabbix-server restart &&\
