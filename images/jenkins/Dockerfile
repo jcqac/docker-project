@@ -13,7 +13,19 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 
 	#Copy Require Binary
 	COPY ./${mvn_archive} /opt/maven
-
+	
+	#install daemon
+	RUN apt-get install -y daemon
+	
+	#install psmisc
+	RUN apt-get install -y psmisc
+	
+	#install net-tools
+	RUN apt-get install -y net-tools
+	
+	#install apt-utils
+	RUN apt-get install -y apt-utils
+	
 	#Setup Java (JRE 7)
 	RUN apt-get update
 	RUN apt-get install -y openjdk-8-jre-headless
@@ -31,18 +43,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	COPY ./environment /etc/
 	RUN chown root:root /etc/environment
 	RUN chmod 644 /etc/environment
-	
-	#install daemon
-	RUN apt-get install -y daemon
-	
-	#install psmisc
-	RUN apt-get install -y psmisc
-	
-	#install net-tools
-	RUN apt-get install -y net-tools
-	
-	#install apt-utils
-	RUN apt-get install -y apt-utils
 
 # Dependencies end ~~
 
@@ -60,8 +60,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	#Run Jenkins
 	RUN service jenkins start
 	
-	#Print initial password to console
-	RUN cat /var/lib/jenkins/secrets/initialAdminPassword
 # Install Jenkins end ~~
 	
 #Expose Jenkins' port
