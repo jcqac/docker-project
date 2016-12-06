@@ -47,14 +47,18 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	RUN dpkg -i ${zabsrv_installer}
 	RUN dpkg -i ${zabfro_installer}
 	
+	#Copy server config file
+	COPY ./zabbix_server.conf /etc/zabbix
+	
 	#This is to make zabbix run using php7 rather than relic php5
 	RUN service zabbix-server restart &&\
 		systemctl enable zabbix-server &&\
 		sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
 		
 	#This sets up default database for Zabbix
-	RUN zcat /usr/share/doc/zabbix-server-mysql-3.2.1/create.sql.gz | mysql -uzabbix --password=G4lacT1ca
-	
+	RUN service mysql start &&\
+		zcat /usr/share/zabbix-server-mysql/{schema,images,data}.sql.gz | mysql -u zabbix --password=G4lacT1ca
+		
 	# This is to set the timezone in php.ini for zabbix to work.
 	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ Europe\/London/' /etc/php/7.0/apache2/php.ini
 	
@@ -71,5 +75,5 @@ EXPOSE 443
 #Expose Zabbix Port
 EXPOSE 10051
 
-ENTRYPOINT service apache2 start && service zabbix-server start && bash
+ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
 
