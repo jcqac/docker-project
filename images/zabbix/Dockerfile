@@ -75,5 +75,5 @@ EXPOSE 443
 #Expose Zabbix Port
 EXPOSE 10051
 
-ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
-
+#ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
+ENTRYPOINT bash
