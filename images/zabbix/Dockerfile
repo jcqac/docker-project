@@ -29,7 +29,8 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	RUN apt-get update
 	
 	#zabbix server dependencies
-	RUN apt-get install -y apache2 libapache2-mod-php php-bcmath php-mbstring php7.0-xml php-cli php-mcrypt php-mysql
+	#RUN apt-get install -y apache2 libapache2-mod-php php-bcmath php-mbstring php7.0-xml php-cli php-mcrypt php-mysql
+	RUN apt-get install -y apache2 libapache2-mod-php7.0 php7.0 php7.0-cli php7.0-common php7.0-mysql php7.0-cgi
 	RUN apt-get install -y libcurl3 libiksemel3 libodbc1 libopenipmi0 libsnmp30 libssh2-1 fping 
 	
 	#zabbix frontend dependencies
@@ -51,10 +52,10 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	#Copy server config file
 	COPY ./zabbix_server.conf /etc/zabbix
 	
-	##This is to make zabbix run using php7 rather than relic php5
-	#RUN service zabbix-server restart &&\
-	#	systemctl enable zabbix-server &&\
-	#	sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
+	#This is to make zabbix run using php7 rather than relic php5
+	RUN service zabbix-server restart &&\
+		systemctl enable zabbix-server &&\
+		sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
 		
 	
 	#Copy initial schema, data and images sql files
@@ -76,7 +77,6 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	RUN service apache2 restart && service zabbix-server restart
 	
 # End Zabbix setup ~~
-
 #Expose MySQL port
 EXPOSE 3306
 #Expose HTTP/S ports
