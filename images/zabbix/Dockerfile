@@ -39,9 +39,13 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	#make opt folder
 	RUN mkdir /opt/zabbix
 		
-	#Install Zabbix debs
-	WORKDIR /opt/zabbix
+	#Install Zabbix from repo
+	RUN wget http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.2-1+xenial_all.deb
+	RUN dpkg -i zabbix-release_3.2-1+xenial_all.deb
+	RUN apt-get update -y
 	RUN apt-get install -y zabbix-server-mysql zabbix-frontend-php
+	
+	WORKDIR /opt/zabbix
 	
 	#Copy server config file
 	COPY ./zabbix_server.conf /etc/zabbix
@@ -50,11 +54,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	RUN service zabbix-server restart &&\
 		systemctl enable zabbix-server &&\
 		sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
-		
-	#Copy initial schema, data and images sql files
-	COPY ./db/schema.sql /opt/zabbix/
-	COPY ./db/data.sql /opt/zabbix/
-	COPY ./db/images.sql /opt/zabbix
 	
 	#This sets up default database for Zabbix
 	RUN service mysql start &&\
