@@ -30,9 +30,9 @@ ENV nex_folder nexus-3.1.0-04
 #	chown -R nexus:nexus /opt/nexus
 RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-password nexus
 	
-WORKDIR opt/nexus/bin
 #update permissions of nexus & folder ownership
-RUN chmod a+x nexus &&\
+WORKDIR opt/nexus/bin
+RUN chmod a+x ./nexus &&\
 	chown chown -R nexus:nexus /opt/nexus
 
 #Set run_as_user in nexus.rc
