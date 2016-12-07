@@ -28,20 +28,23 @@ ENV nex_folder nexus-3.1.0-04
 #RUN useradd -M nexus &&\
 #	usermod -L nexus &&\
 #	chown -R nexus:nexus /opt/nexus
+RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-password nexus
 	
 WORKDIR opt/nexus/bin
+#update permissions of nexus & folder ownership
+RUN chmod a+x nexus &&\
+	chown chown -R nexus:nexus /opt/nexus
 
 #Set run_as_user in nexus.rc
-#RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
+RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
 	
 # Install Nexus as a Service init.d
-	#Set environment variable for nexus home
-	RUN /bin/bash -c "echo NEXUS_HOME='\"/opt/nexus\"' >> /etc/environment" &&\
-	/bin/bash -c "source /etc/environment" &&\
 	ln -s ${NEXUS_HOME}/bin/nexus /etc/init.d/nexus
-	
 	WORKDIR /etc/init.d
 	RUN update-rc.d nexus defaults
+	
+	#Run nexus as the user nexus
+	USER nexus
 	RUN service nexus start
 # Nexus as a service end
 	
