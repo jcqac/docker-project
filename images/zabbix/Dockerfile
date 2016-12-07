@@ -51,10 +51,10 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	#Copy server config file
 	COPY ./zabbix_server.conf /etc/zabbix
 	
-	#This is to make zabbix run using php7 rather than relic php5
-	RUN service zabbix-server restart &&\
-		systemctl enable zabbix-server &&\
-		sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
+	##This is to make zabbix run using php7 rather than relic php5
+	#RUN service zabbix-server restart &&\
+	#	systemctl enable zabbix-server &&\
+	#	sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
 		
 	
 	#Copy initial schema, data and images sql files
@@ -69,7 +69,7 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 		
 	#This is to set the timezone in php.ini for zabbix to work.
 	#Finds the line with date and repleaces the whole line
-	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ Europe\/London/' /etc/php/7.0/apache2/php.ini
+	#RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ Europe\/London/' /etc/php/7.0/apache2/php.ini
 	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ UTC/' /etc/php/7.0/apache2/php.ini
 	
 	#This is to stop the apache service in order to start it on entry
