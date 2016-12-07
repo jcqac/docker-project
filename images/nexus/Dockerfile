@@ -34,7 +34,7 @@ RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
 # Install Nexus as a Service init.d
 	#Set environment variable for nexus home
 	RUN /bin/bash -c "echo NEXUS_HOME='\"/opt/nexus\"' >> /etc/environment"
-	RUN source /etc/environment
+	RUN /bin/bash -c "source /etc/environment"
 	RUN ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
 	
 	WORKDIR /etc/init.d
