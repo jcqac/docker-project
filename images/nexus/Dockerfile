@@ -21,20 +21,23 @@ ENV nex_folder nexus-3.1.0-04
 
 #Setup Nexus end ~~
 
-#Set run_as_user in bash.rc
+#Set run_as_user in nexus.rc
 WORKDIR opt/nexus/bin
-RUN echo "run_as_user="nexus"" > ./nexus.rc 
+RUN echo run_as_user="nexus" > ./nexus.rc 
 
 #Setup Nexus user
 RUN groupadd nexus &&\
 	useradd -g nexus nexus --shell=/sbin/nologin
 	
-# Install Nexus as a Service
-COPY ./nexus.service /etc/systemd/system/
-RUN systemctl daemon-reload &&\
-	systemctl enable nexus.service &&\
-	systemctl start nexus.service
+# Install Nexus as a Service init.d
+	#Set environment variable for nexus home
+	RUN echo NEXUS_HOME="/opt/nexus" > /etc/environment
 	
+	RUN ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
+	WORKDIR /etc/init.d
+	RUN update-rc.d nexus default
+	RUN service nexus start
+# Nexus as a service end
 	
 #Expose Nexus ports
 EXPOSE 8081
