@@ -25,10 +25,13 @@ RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat/temp tomcat
 
 #update permissions of tomcat & folder ownership
 RUN	chown -R tomcat:tomcat /opt/tomcat
+RUN chmod -R uga+rwx /opt/tomcat
 
 #update permissions of tomcat shell scripts
 WORKDIR /opt/tomcat/bin
-RUN chmod a+x *.sh
+RUN chmod uga+x *.sh
+
+
 
 # Install tomcat as a Service init.d
 	#Copy init script
