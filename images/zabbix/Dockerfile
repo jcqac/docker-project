@@ -31,7 +31,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	RUN apt-get install -y libcurl3 libiksemel3 libodbc1 libopenipmi0 libsnmp30 libssh2-1 fping libcurl3-gnutls snmpd traceroute snmptrapd logrotate
 	
 	#zabbix frontend dependencies
-	RUN apt-get install -y php-gd php-ldap ttf-dejavu-core#
+	RUN apt-get install -y php-gd php-ldap ttf-dejavu-core
 	
 # Dependencies setup end ~~
 
