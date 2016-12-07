@@ -35,7 +35,7 @@ RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
 	#Set environment variable for nexus home
 	RUN /bin/bash -c "echo NEXUS_HOME='\"/opt/nexus\"' >> /etc/environment" &&\
 	source /etc/environment &&\
-	ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
+	ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
 	
 	WORKDIR /etc/init.d
 	RUN update-rc.d nexus defaults
