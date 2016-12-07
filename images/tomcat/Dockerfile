@@ -21,14 +21,16 @@ ENV CATALINA_HOME="/opt/tomcat"
 	
 #Create Tomcat group and user
 RUN groupadd tomcat
-RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat/ tomcat
+RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat/temp tomcat
 
 #update permissions of tomcat & folder ownership
 WORKDIR /opt/tomcat
-RUN	chgrp -R tomcat /opt/tomcat
-RUN chmod -R g+r conf
-RUN chmod g+x conf
-RUN chown -R tomcat webapps/ work/ temp/ logs/
+RUN rm -rf logs/
+RUN mkdir logs/
+RUN	chown -R tomcat:tomcat /opt/tomcat
+RUN chmod -R 770 /opt/tomcat
+RUN chown -R tomcat:tomcat webapps/ temp/ logs/ work/ conf/
+RUN chmod -R 770 webapps temp logs work conf
 
 #update permissions of tomcat shell scripts
 #WORKDIR /opt/tomcat/bin
