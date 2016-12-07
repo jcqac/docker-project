@@ -1,62 +1,16 @@
 #!/bin/bash
-#
-#Apache Tomcat8 init Script
-#
 #https://www.ntu.edu.sg/home/ehchua/programming/howto/Ubuntu_HowTo.html#tomcat
-#https://gist.github.com/patmandenver/be92a9eb4bd74df96928
 
 CATALINA_HOME=/opt/tomcat
-PID_FOLDER=/var/run/tomcat
-PID_FILE=$PID_FOLDER/tomcat.pid
-
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
 start() {
-  echo -n "Starting Tomcat at $CATALINA_HOME"
-  if [ ! -d $PID_FOLDER ]; then
-    mkdir $PID_FOLDER
-    chown tomcat:tomcat $PID_FOLDER
-  fi
-  su - tomcat -c "$CATALINA_HOME/bin/startup.sh"
-  RETVAL=$?
+ sh $CATALINA_HOME/bin/startup.sh
 }
-
 stop() {
-  echo -n "Stopping Tomcat"
-  su - tomcat -c "$CATALINA_HOME/bin/shutdown.sh -force"
-  RETVAL=$?
+ sh $CATALINA_HOME/bin/shutdown.sh
 }
-
-status() {
-  if [ -f $PID_FILE ]; then
-    PID=`cat $PID_FILE`
-    echo "Tomcat is running process Id: $PID"
-  else
-    echo "Tomcat is not running"
-  fi
-  exit 0
-}
-
-case "$1" in
- start)
-  start
-   ;;
- stop)
-  stop
-   ;;
- restart)
-  stop
-  start
-   ;;
- status)
-  status
-   ;;
- version)
-   $CATALINA_HOME/bin/version.sh
-   RETVAL=$?
-    ;;
- *)
-  echo "Usage: $0 {start|stop|restart|status|version}"
-  exit 1
-   ;;
+case $1 in
+  start|stop) $1;;
+  restart) stop; start;;
+  *) echo "Run as $0 <start|stop|restart>"; exit 1;;
 esac
-
-exit $RETVAL
