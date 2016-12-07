@@ -28,7 +28,7 @@ RUN	chown -R tomcat:tomcat /opt/tomcat
 
 #update permissions of tomcat shell scripts
 WORKDIR /opt/tomcat/bin
-RUN chmod uga+x *.sh
+RUN chmod a+x *.sh
 
 # Install tomcat as a Service init.d
 	#Copy init script
