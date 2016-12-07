@@ -27,7 +27,6 @@ ENV NEXUS_HOME="/opt/nexus"
 #	chown -R nexus:nexus /opt/nexus
 RUN groupadd nexus
 RUN useradd -s /sbin/nologin -g nexus -M nexus
-#RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-password nexus
 	
 #update permissions of nexus & folder ownership
 WORKDIR opt/nexus/bin
@@ -40,8 +39,7 @@ RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
 	
 # Install Nexus as a Service init.d
 	RUN ln -s ${NEXUS_HOME}/bin/nexus /etc/init.d/nexus
-	WORKDIR /etc/init.d
-	RUN update-rc.d nexus defaults
+	RUN update-rc.d /etc/init.d/nexus defaults
 	
 	#Run nexus as the user nexus
 	USER nexus

@@ -13,25 +13,35 @@ ENV CATALINA_HOME="/opt/tomcat"
 	COPY ./${tcat_archive} /opt
 #Dependencies End ~~
 
-#Create Tomcat group and user
-RUN groupadd tomcat
-RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat tomcat
-
 #Setup TomCat ~~
 	#Setup TomCat
 	WORKDIR /opt
 	RUN tar -xvzf ${tcat_archive}
 	RUN mv ./${tcat_folder} ./tomcat
 	
-	#Copy initialisation script
-	#COPY ./tomcat /etc/init.d
-	#RUN chmod 755 /etc/init.d/tomcat
+#Create Tomcat group and user
+RUN groupadd tomcat
+RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat/temp tomcat
 
+#update permissions of tomcat & folder ownership
+RUN	chown -R tomcat:tomcat /opt/tomcat
+
+# Install tomcat as a Service init.d
+	#Copy init script
+	COPY ./tomcat /etc/init.d
+	#Set permissions of init.d tomcat
+	RUN chmod 755 /etc/init.d/tomcat
+	RUN update-rc.d /etc/init.d/tomcat defaults
+	
+	#Run tomcat as the user tomcat
+	USER tomcat
+	RUN service tomcat start
+	
+# tomcat as a service end
 #Setup TomCat end ~~
 	
 #Expose TomCat ports
 EXPOSE 8080
 
 #Start TomCat
-ENTRYPOINT /opt/tomcat/apache-tomcat/bin/startup.sh && bash
-
+ENTRYPOINT service tomcat start && bash
