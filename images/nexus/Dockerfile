@@ -32,8 +32,8 @@ RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-p
 	
 #update permissions of nexus & folder ownership
 WORKDIR opt/nexus/bin
-RUN chmod a+x ./nexus &&\
-	chown chown -R nexus:nexus /opt/nexus
+RUN chmod a+x /opt/nexus/bin/nexus
+RUN	chown chown -R nexus:nexus /opt/nexus
 
 #Set run_as_user in nexus.rc
 RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
