@@ -73,7 +73,7 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ UTC/' /etc/php/7.0/apache2/php.ini
 	
 	#This is to stop the apache service in order to start it on entry
-	RUN service apache2 restart && service zabbix restart
+	RUN service apache2 restart && service zabbix-server restart
 	
 # End Zabbix setup ~~
 
