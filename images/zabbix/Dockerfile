@@ -58,6 +58,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 	#Copy server config file
 	#COPY ./zabbix_server.conf /etc/zabbix
+	WORKDIR /etc/zabbix
 	RUN \
 	sed -i '/# DBHost=/c\DBHost=localhost' zabbix_server.conf &&\
 	sed -i '/DBName=zabbix/c\DBName=zabbixdb' zabbix_server.conf &&\
