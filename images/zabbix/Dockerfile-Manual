@@ -1,6 +1,9 @@
 FROM jc-sql-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
-#This dockerfile uses apt - manual installation never worked properly
+
+ENV zabsrv_installer zabbix-server-mysql_3.2.1-1+xenial_amd64.deb
+ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
+
 
 #MySQL DB setup  ~~
 	#Dependencies Start ~~
@@ -38,10 +41,14 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 # Start Zabbix setup ~~
 	#make opt folder
 	RUN mkdir /opt/zabbix
-		
+	#Copy Zabbix installers 
+	COPY ./${zabsrv_installer} /opt/zabbix
+	COPY ./${zabfro_installer} /opt/zabbix
+	
 	#Install Zabbix debs
 	WORKDIR /opt/zabbix
-	RUN apt-get install -y zabbix-server-mysql zabbix-frontend-php
+	RUN dpkg -i ${zabsrv_installer}
+	RUN dpkg -i ${zabfro_installer}
 	
 	#Copy server config file
 	COPY ./zabbix_server.conf /etc/zabbix
@@ -51,6 +58,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 		systemctl enable zabbix-server &&\
 		sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
 		
+	
 	#Copy initial schema, data and images sql files
 	COPY ./db/schema.sql /opt/zabbix/
 	COPY ./db/data.sql /opt/zabbix/
