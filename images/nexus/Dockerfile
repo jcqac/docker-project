@@ -23,7 +23,7 @@ ENV nex_folder nexus-3.1.0-04
 
 #Set run_as_user in nexus.rc
 WORKDIR opt/nexus/bin
-RUN /bin/bash -c 'echo run_as_user="nexus" >>> /opt/nexus/bin/nexus.rc'
+RUN /bin/bash -c 'echo run_as_user="nexus" > /opt/nexus/bin/nexus.rc'
 
 #Setup Nexus user
 RUN groupadd nexus &&\
