@@ -1,6 +1,9 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
+#Global Env values
+ENV NEXUS_HOME="/opt/nexus"
+
 #Env value for nexus archive
 ENV nex_archive nexus-3.1.0-04-unix.tar.gz
 ENV nex_folder nexus-3.1.0-04
@@ -35,7 +38,7 @@ WORKDIR opt/nexus/bin
 	#Set environment variable for nexus home
 	RUN /bin/bash -c "echo NEXUS_HOME='\"/opt/nexus\"' >> /etc/environment" &&\
 	/bin/bash -c "source /etc/environment" &&\
-	ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+	ln -s ${NEXUS_HOME}/bin/nexus /etc/init.d/nexus
 	
 	WORKDIR /etc/init.d
 	RUN update-rc.d nexus defaults

@@ -1,7 +1,13 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env value for installer location
+#Env global variables for maven
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/jvm/bin:/opt/java/jvm/db/bin:/opt/java/jvm/jre/bin:/opt/maven/m2/bin"
+ENV J2SDKDIR="/opt/java/jvm"
+ENV J2REDIR="/opt/java/jvm/jre"
+ENV JAVA_HOME="/opt/java/jvm"
+ENV DERBY_HOME="/opt/java/jvm/db"
+ENV M2_HOME="/opt/maven/m2"
 
 # Dependencies Start ~~
 	#Env variables maven
@@ -43,9 +49,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	COPY ./environment /etc/
 	RUN chown root:root /etc/environment
 	RUN chmod 644 /etc/environment
-	
-	#load environment variables
-	RUN source /etc/environment
 
 # Dependencies end ~~
 

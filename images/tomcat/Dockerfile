@@ -1,6 +1,9 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
+#Global ENV .e.g CATALINA_HOME
+ENV CATALINA_HOME="/opt/apache-tomcat"
+
 #Env value for tomcat archive
 ENV tcat_archive apache-tomcat-9.0.0.M13.tar.gz
 ENV tcat_folder apache-tomcat-9.0.0.M13
@@ -20,8 +23,8 @@ ENV tcat_folder apache-tomcat-9.0.0.M13
 	RUN mv ./${tcat_folder} ./apache-tomcat
 	
 	#Copy initialisation script
-	COPY ./tomcat /etc/init.d
-	RUN chmod 755 /etc/init.d/tomcat
+	#COPY ./tomcat /etc/init.d
+	#RUN chmod 755 /etc/init.d/tomcat
 
 #Setup TomCat end ~~
 	

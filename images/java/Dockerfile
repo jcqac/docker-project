@@ -1,7 +1,14 @@
 FROM ubuntu:16.04
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env variables for java
+#Global ENV for Java e.g. JAVA_HOME
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/jvm/bin:/opt/java/jvm/db/bin:/opt/java/jvm/jre/bin"
+ENV J2SDKDIR="/opt/java/jvm"
+ENV J2REDIR="/opt/java/jvm/jre"
+ENV JAVA_HOME="/opt/java/jvm"
+ENV DERBY_HOME="/opt/java/jvm/db"
+
+#Env variables for java installation
 ENV java_archive jdk-8u112-linux-x64.tar.gz
 ENV java_folder jdk1.8.0_112
 
@@ -27,6 +34,4 @@ COPY ./environment /etc/
 RUN chown root:root /etc/environment
 RUN chmod 644 /etc/environment
 
-# Load updated environment
-RUN source /etc/environment
 
