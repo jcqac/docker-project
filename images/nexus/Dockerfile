@@ -34,7 +34,7 @@ RUN groupadd nexus &&\
 	RUN echo NEXUS_HOME="/opt/nexus" > /etc/environment
 	
 	RUN ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
-	WORKDIR /etc/init.d
+	WORKDIR /opt/nexus/bin/nexus
 	RUN update-rc.d nexus defaults
 	RUN service nexus start
 # Nexus as a service end
