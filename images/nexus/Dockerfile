@@ -43,5 +43,5 @@ RUN groupadd nexus &&\
 #Expose Nexus ports
 EXPOSE 8081
 
-ENTRYPOINT systemctl start nexus.service
+ENTRYPOINT service nexus start && bash
 
