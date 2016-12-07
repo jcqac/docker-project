@@ -68,10 +68,12 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 		service mysql stop
 		
 	# This is to set the timezone in php.ini for zabbix to work.
+	Finds the line with date and repleaces the whole line
 	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ Europe\/London/' /etc/php/7.0/apache2/php.ini
+	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ UTC/' /etc/php/7.0/apache2/php.ini
 	
 	#This is to stop the apache service in order to start it on entry
-	RUN service apache2 stop
+	RUN service apache2 restart && service zabbix restart
 	
 # End Zabbix setup ~~
 
