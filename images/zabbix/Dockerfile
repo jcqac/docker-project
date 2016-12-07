@@ -24,9 +24,8 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 #Start Setup of Zabbix Server & Zabbix PHP frontend ~~
 	#Zabbix Dependencies - PHP & Apache2
 	RUN apt-get update 
-	
 	#PHP 7
-	RUN apt-get install -y apache2 libapache2-mod-php7.0 php7.0-cli php7.0-common php7.0-cli php7.0-json php7.0-mysql php7.0-cgi php7.0-xml php7.0-bcmath php7.0-mbstring
+	RUN apt-get install -y apache2 libapache2-mod-php7.0 php7.0-cli php7.0-common php7.0-cli php7.0-json php7.0-mysql php7.0-cgi php7.0-xml php7.0-bcmath php7.0-mbstring wget
 	
 # Dependencies setup end ~~
 
