@@ -25,4 +25,3 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 EXPOSE 3306
 
 ENTRYPOINT service mysql start && bash
-

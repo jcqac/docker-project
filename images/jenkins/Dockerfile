@@ -1,6 +1,13 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
+#Env maven archives
+ENV mvn_archive apache-maven-3.3.9-bin.tar.gz
+ENV mvn_folder apache-maven-3.3.9
+
+#Jenkins installer
+ENV jenkins_installer jenkins_2.7.4_all.deb
+
 #Env global variables for maven
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/jvm/bin:/opt/java/jvm/db/bin:/opt/java/jvm/jre/bin:/opt/maven/m2/bin"
 ENV J2SDKDIR="/opt/java/jvm"
@@ -10,9 +17,6 @@ ENV DERBY_HOME="/opt/java/jvm/db"
 ENV M2_HOME="/opt/maven/m2"
 
 # Dependencies Start ~~
-	#Env variables maven
-	ENV mvn_archive apache-maven-3.3.9-bin.tar.gz
-	ENV mvn_folder apache-maven-3.3.9
 
 	#Setup required folders
 	RUN mkdir /opt/maven
@@ -54,7 +58,6 @@ ENV M2_HOME="/opt/maven/m2"
 
 # Install Jenkins start ~~
 	RUN mkdir /opt/jenkins
-	ENV jenkins_installer jenkins_2.7.4_all.deb
 	WORKDIR /opt/jenkins
 	
 	#Copy Jenkins installer

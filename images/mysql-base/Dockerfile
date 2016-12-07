@@ -1,8 +1,6 @@
 FROM ubuntu:16.04
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env value for installer location
-
 #Env value for mysql installer
 ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 

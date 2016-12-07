@@ -1,8 +1,6 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Env value for installer location
-
 #Env value for jira installer
 ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 

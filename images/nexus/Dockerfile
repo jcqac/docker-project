@@ -1,12 +1,12 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Global Env values
-ENV NEXUS_HOME="/opt/nexus"
-
 #Env value for nexus archive
 ENV nex_archive nexus-3.1.0-04-unix.tar.gz
 ENV nex_folder nexus-3.1.0-04
+
+#Global Env values
+ENV NEXUS_HOME="/opt/nexus"
 
 #Dependencies Start ~~
 	#Copy required files
@@ -25,7 +25,9 @@ ENV nex_folder nexus-3.1.0-04
 #RUN useradd -M nexus &&\
 #	usermod -L nexus &&\
 #	chown -R nexus:nexus /opt/nexus
-RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-password nexus
+RUN groupadd nexus
+RUN useradd -s /sbin/nologin -g nexus -M nexus
+#RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-password nexus
 	
 #update permissions of nexus & folder ownership
 WORKDIR opt/nexus/bin

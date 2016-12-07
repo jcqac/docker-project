@@ -1,26 +1,27 @@
 FROM jc-java-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
-#Global ENV .e.g CATALINA_HOME
-ENV CATALINA_HOME="/opt/apache-tomcat"
-
 #Env value for tomcat archive
 ENV tcat_archive apache-tomcat-9.0.0.M13.tar.gz
 ENV tcat_folder apache-tomcat-9.0.0.M13
 
-#Dependencies Start ~~
-	#Setup required folders
-	RUN mkdir /opt/tomcat
+#Global ENV .e.g CATALINA_HOME
+ENV CATALINA_HOME="/opt/tomcat"
 
+#Dependencies Start ~~
 	#Copy required files
-	COPY ./${tcat_archive} /opt/tomcat
+	COPY ./${tcat_archive} /opt
 #Dependencies End ~~
+
+#Create Tomcat group and user
+RUN groupadd tomcat
+RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat tomcat
 
 #Setup TomCat ~~
 	#Setup TomCat
-	WORKDIR /opt/tomcat
+	WORKDIR /opt
 	RUN tar -xvzf ${tcat_archive}
-	RUN mv ./${tcat_folder} ./apache-tomcat
+	RUN mv ./${tcat_folder} ./tomcat
 	
 	#Copy initialisation script
 	#COPY ./tomcat /etc/init.d

@@ -74,11 +74,9 @@ ENV zabfro_installer zabbix-frontend-php_3.2.1-1+xenial_all.deb
 # End Zabbix setup ~~
 #Expose MySQL port
 EXPOSE 3306
-#Expose HTTP/S ports
+#Expose HTTP ports
 EXPOSE 80
-EXPOSE 443
 #Expose Zabbix Port
 EXPOSE 10051
 
 ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
-#ENTRYPOINT bash
