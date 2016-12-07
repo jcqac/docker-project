@@ -26,7 +26,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	RUN apt-get update
 	
 	#zabbix server dependencies
-	#RUN apt-get install -y apache2 libapache2-mod-php php-bcmath php-mbstring php7.0-xml php-cli php-mcrypt php-mysql
+	#RUN apt-get install -y apache2 libapache2-mod-php php-bcmath php-mbstring php7.0-xml php-cli php-mcrypt php-mysql wget
 	RUN apt-get install -y apache2 libapache2-mod-php7.0 php7.0 php7.0-cli php7.0-common php7.0-mysql php7.0-cgi php7.0-xml php7.0-bcmath php7.0-mbstring php-mysql
 	RUN apt-get install -y libcurl3 libiksemel3 libodbc1 libopenipmi0 libsnmp30 libssh2-1 fping libcurl3-gnutls snmpd traceroute snmptrapd logrotate
 	
