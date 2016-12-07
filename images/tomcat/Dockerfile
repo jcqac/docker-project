@@ -31,7 +31,8 @@ RUN	chown -R tomcat:tomcat /opt/tomcat
 	COPY ./tomcat /etc/init.d
 	#Set permissions of init.d tomcat
 	RUN chmod 755 /etc/init.d/tomcat
-	RUN update-rc.d /etc/init.d/tomcat defaults
+	WORKDIR /etc/init.d
+	RUN update-rc.d tomcat defaults
 	
 	#Run tomcat as the user tomcat
 	USER tomcat
