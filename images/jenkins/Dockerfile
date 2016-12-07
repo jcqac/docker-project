@@ -43,6 +43,9 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	COPY ./environment /etc/
 	RUN chown root:root /etc/environment
 	RUN chmod 644 /etc/environment
+	
+	#load environment variables
+	RUN source /etc/environment
 
 # Dependencies end ~~
 

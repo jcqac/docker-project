@@ -3,4 +3,3 @@ J2SDKDIR="/opt/java/jvm"
 J2REDIR="/opt/java/jvm/jre"
 JAVA_HOME="/opt/java/jvm"
 DERBY_HOME="/opt/java/jvm/db"
-

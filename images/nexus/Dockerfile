@@ -21,18 +21,21 @@ ENV nex_folder nexus-3.1.0-04
 
 #Setup Nexus end ~~
 
-#Set run_as_user in nexus.rc
-WORKDIR opt/nexus/bin
-RUN /bin/bash -c 'echo run_as_user="nexus" > /opt/nexus/bin/nexus.rc'
-
 #Setup Nexus user
-RUN groupadd nexus &&\
-	useradd -g nexus nexus
+RUN useradd -M nexus &&\
+	usermod -L nexus &&\
+	chown -R nexus:nexus /opt/nexus
+	
+WORKDIR opt/nexus/bin
+
+#Set run_as_user in nexus.rc
+RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
 	
 # Install Nexus as a Service init.d
 	#Set environment variable for nexus home
-	RUN /bin/bash -c 'echo NEXUS_HOME="/opt/nexus" >> /etc/environment' &&\
-	ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+	RUN /bin/bash -c "echo NEXUS_HOME='\"/opt/nexus\"' >> /etc/environment" &&\
+	source /etc/environment &&\
+	ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
 	
 	WORKDIR /etc/init.d
 	RUN update-rc.d nexus defaults
@@ -43,4 +46,3 @@ RUN groupadd nexus &&\
 EXPOSE 8081
 
 ENTRYPOINT service nexus start && bash
-
