@@ -25,10 +25,10 @@ RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat/temp tomcat
 
 #update permissions of tomcat & folder ownership
 RUN	chown -R tomcat:tomcat /opt/tomcat
-RUN chmod -R 770 /opt/tomcat
+RUN chmod -R 0755 /opt/tomcat
 WORKDIR /opt/tomcat
 RUN chown -R tomcat:tomcat webapps temp logs work conf
-RUN chmod -R 770 webapps temp logs work conf
+RUN chmod -R 0755 webapps temp logs work conf
 
 #update permissions of tomcat shell scripts
 #WORKDIR /opt/tomcat/bin
