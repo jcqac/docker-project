@@ -35,7 +35,7 @@ RUN groupadd nexus &&\
 	
 	RUN ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
 	WORKDIR /etc/init.d
-	RUN update-rc.d nexus default
+	RUN update-rc.d nexus defaults
 	RUN service nexus start
 # Nexus as a service end
 	
