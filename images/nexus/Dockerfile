@@ -9,9 +9,6 @@ ENV nex_archive nexus-3.1.0-04-unix.tar.gz
 ENV nex_folder nexus-3.1.0-04
 
 #Dependencies Start ~~
-	#Setup required folders
-	#RUN mkdir /opt/nexus
-
 	#Copy required files
 	COPY ./${nex_archive} /opt
 #Dependencies End ~~
@@ -32,8 +29,9 @@ RUN echo "Y Y Y Y Y Y " | adduser --no-create-home --disabled-login --disabled-p
 	
 #update permissions of nexus & folder ownership
 WORKDIR opt/nexus/bin
-RUN chmod a+x /opt/nexus/bin/nexus
 RUN	chown -R nexus:nexus /opt/nexus
+RUN chown -R nexus:nexus /opt/sonatype-work
+RUN chmod a+x /opt/nexus/bin/nexus
 
 #Set run_as_user in nexus.rc
 RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
