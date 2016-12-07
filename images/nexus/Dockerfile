@@ -21,15 +21,15 @@ ENV nex_folder nexus-3.1.0-04
 
 #Setup Nexus end ~~
 
-#Setup Nexus user
-RUN useradd -M nexus &&\
-	usermod -L nexus &&\
-	chown -R nexus:nexus /opt/nexus
+##Setup Nexus user
+#RUN useradd -M nexus &&\
+#	usermod -L nexus &&\
+#	chown -R nexus:nexus /opt/nexus
 	
 WORKDIR opt/nexus/bin
 
 #Set run_as_user in nexus.rc
-RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
+#RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/nexus/bin/nexus.rc"
 	
 # Install Nexus as a Service init.d
 	#Set environment variable for nexus home
