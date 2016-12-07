@@ -1,4 +1,4 @@
-FROM jc-sql-base
+FROM jc-mysql-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
 #Dependencies Start ~~

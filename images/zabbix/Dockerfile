@@ -1,4 +1,4 @@
-FROM jc-sql-base
+FROM jc-mysql-base
 MAINTAINER Johnny Che <johnny.che@qa.com>
 
 ENV zabsrv_installer zabbix-server-mysql_3.2.1-1+xenial_amd64.deb
