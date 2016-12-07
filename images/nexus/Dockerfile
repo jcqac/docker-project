@@ -26,8 +26,8 @@ WORKDIR opt/nexus/bin
 RUN echo "run_as_user="nexus"" > ./nexus.rc 
 
 #Setup Nexus user
-RUN useradd -g nexus nexus --shell=/sbin/nologin &&\
-	useradd -s /sbin/nologin -g nexus -d /path/to/nexus nexus
+RUN groupadd nexus &&\
+	useradd -g nexus nexus --shell=/sbin/nologin
 	
 # Install Nexus as a Service
 COPY ./nexus.service /etc/systemd/system/
