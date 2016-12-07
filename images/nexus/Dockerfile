@@ -23,7 +23,7 @@ ENV nex_folder nexus-3.1.0-04
 
 #Set run_as_user in nexus.rc
 WORKDIR opt/nexus/bin
-RUN echo 'run_as_user="nexus"' > ./nexus.rc 
+CMD echo 'run_as_user="nexus"' > ./nexus.rc 
 
 #Setup Nexus user
 RUN groupadd nexus &&\
@@ -31,7 +31,7 @@ RUN groupadd nexus &&\
 	
 # Install Nexus as a Service init.d
 	#Set environment variable for nexus home
-	RUN echo 'NEXUS_HOME="/opt/nexus"' > /etc/environment &&\
+	CMD echo 'NEXUS_HOME="/opt/nexus"' > /etc/environment &&\
 	cat /etc/environment &&\
 	ln -s $NEXUS_HOME/bin/nexus /etc/init.d/nexus
 	
