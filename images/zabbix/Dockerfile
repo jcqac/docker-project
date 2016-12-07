@@ -23,15 +23,10 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 
 #Start Setup of Zabbix Server & Zabbix PHP frontend ~~
 	#Zabbix Dependencies - PHP & Apache2
-	RUN apt-get update
+	RUN apt-get update 
 	
-	#zabbix server dependencies
-	#RUN apt-get install -y apache2 libapache2-mod-php php-bcmath php-mbstring php7.0-xml php-cli php-mcrypt php-mysql wget
-	RUN apt-get install -y apache2 libapache2-mod-php7.0 php7.0 php7.0-cli php7.0-common php7.0-mysql php7.0-cgi php7.0-xml php7.0-bcmath php7.0-mbstring php-mysql
-	RUN apt-get install -y libcurl3 libiksemel3 libodbc1 libopenipmi0 libsnmp30 libssh2-1 fping libcurl3-gnutls snmpd traceroute snmptrapd logrotate wget
-	
-	#zabbix frontend dependencies
-	RUN apt-get install -y php-gd php-ldap ttf-dejavu-core
+	#PHP 7
+	RUN apt-get install -y apache2 libapache2-mod-php7.0 php7.0-cli php7.0-common php7.0-cli php7.0-json php7.0-mysql php7.0-cgi php7.0-xml php7.0-bcmath php7.0-mbstring
 	
 # Dependencies setup end ~~
 
@@ -47,23 +42,28 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 	WORKDIR /opt/zabbix
 	
-	#Copy server config file
-	COPY ./zabbix_server.conf /etc/zabbix
-	
-	#This is to make zabbix run using php7 rather than relic php5
-	RUN service zabbix-server restart &&\
-		systemctl enable zabbix-server &&\
-		sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
-	
 	#This sets up default database for Zabbix
 	RUN service mysql start &&\
 		zcat /usr/share/doc/zabbix-server-mysql/create.sql.gz | mysql zabbixdb -u zabbix --password=G4lacT1ca &&\
 		service mysql stop
-		
+	
 	#This is to set the timezone in php.ini for zabbix to work.
 	#Finds the line with date and repleaces the whole line
 	#RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ Europe\/London/' /etc/php/7.0/apache2/php.ini
 	RUN sed -i 's/\;date\.timezone\ =/date.timezone\ =\ UTC/' /etc/php/7.0/apache2/php.ini
+	
+	#This is to make zabbix run using php7 rather than relic php5
+	#RUN service zabbix-server restart &&\
+	#	systemctl enable zabbix-server &&\
+	#	sed -i s/mod_php5.c/mod_php7.c/ /etc/zabbix/apache.conf 
+	
+	#Copy server config file
+	#COPY ./zabbix_server.conf /etc/zabbix
+	RUN \
+	sed -i '/# DBHost=/c\DBHost=localhost' zabbix_server.conf &&\
+	sed -i '/DBName=zabbix/c\DBName=zabbixdb' zabbix_server.conf &&\
+	sed -i '/# DBPassword=/c\DBPassword=G4lacT1ca' zabbix_server.conf &&\
+	sed -i '/# DBPort=/c\DBPort=3306' zabbix_server.conf
 	
 	#This is to stop the apache service in order to start it on entry
 	RUN service apache2 restart && service zabbix-server restart
@@ -78,4 +78,3 @@ EXPOSE 443
 EXPOSE 10051
 
 ENTRYPOINT service mysql start && service apache2 start && service zabbix-server start && bash
-#ENTRYPOINT bash
