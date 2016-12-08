@@ -45,7 +45,7 @@ RUN chmod -R 770 webapps/ temp/ logs/ work/ conf/
 	RUN update-rc.d tomcat defaults
 	
 	#Run tomcat as the user tomcat
-	USER tomcat
+	#USER tomcat
 	RUN service tomcat start
 	
 # tomcat as a service end
