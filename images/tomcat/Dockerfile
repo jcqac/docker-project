@@ -50,7 +50,12 @@ RUN chmod -R 770 webapps/ temp/ logs/ work/ conf/
 	
 # tomcat as a service end
 #Setup TomCat end ~~
-	
+
+# Create tomcat manager login
+RUN sed -i '/<Context>/c\<Context reloadable="true">' /opt/tomcat/conf/context.xml
+RUN sed -i '22i <role rolename="manager-gui"/>' /opt/tomcat/conf/tomcat-users.xml
+RUN sed -i '23i <user username="tomcat" password="s3cret" roles="manager-gui"/>' /opt/tomcat/conf/tomcat-users.xml
+
 #Expose TomCat ports
 EXPOSE 8080
 
