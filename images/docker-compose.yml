@@ -1,4 +1,4 @@
-#version: '2'
+version: '2'
 services:
  jenkins:
   build: ./jenkins/
@@ -18,8 +18,8 @@ services:
    - "8081:8080"
   tty: true
   links:
-   - mysql-jira
- 
+  - mysql-jira
+
  nexus:
   build: ./nexus/
   ports: 
