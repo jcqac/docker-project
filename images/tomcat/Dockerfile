@@ -15,7 +15,7 @@ ENV CATALINA_HOME /opt/${tcat_folder}
 	
 #Create Tomcat group and user
 RUN groupadd tomcat
-RUN useradd -s /sbin/nologin -g tomcat -d /opt/${tcat_folder}/ tomcat
+RUN useradd -s /sbin/nologin -g tomcat -d ${CATALINA_HOME}/ tomcat
 
 #Setup TomCat ~~
 	#Setup TomCat
@@ -24,16 +24,16 @@ RUN useradd -s /sbin/nologin -g tomcat -d /opt/${tcat_folder}/ tomcat
 	RUN tar -xvzf ${tcat_archive}
 
 #update permissions of tomcat & folder ownership
-WORKDIR /opt/${tcat_folder}
+WORKDIR ${CATALINA_HOME}
 RUN rm -rf logs/
 RUN mkdir logs/
-RUN	chown -R tomcat:tomcat /opt/${tcat_folder}
-RUN chmod -R 755 /opt/${tcat_folder}
+RUN	chown -R tomcat:tomcat ${CATALINA_HOME}
+RUN chmod -R 755 ${CATALINA_HOME}
 RUN chown -R tomcat:tomcat webapps/ temp/ logs/ work/ conf/
 RUN chmod -R 755 webapps/ temp/ logs/ work/ conf/
 
 #update permissions of tomcat shell scripts
-WORKDIR /opt/${tcat_folder}/bin
+WORKDIR ${CATALINA_HOME}/bin
 RUN chmod ug+x *.sh
 
 # Install tomcat as a Service init.d
@@ -56,8 +56,8 @@ RUN chmod ug+x *.sh
 #Setup TomCat end ~~
 
 # Create tomcat manager login
-RUN sed -i '22i <role rolename="manager-gui"/>' /opt/${tcat_folder}/conf/tomcat-users.xml
-RUN sed -i '23i <user username="tomcat" password="T0mc4t" roles="manager-gui"/>' /opt/${tcat_folder}/conf/tomcat-users.xml
+RUN sed -i '22i <role rolename="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
+RUN sed -i '23i <user username="tomcat" password="T0mc4t" roles="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
 
 #Expose TomCat ports
 EXPOSE 8080
