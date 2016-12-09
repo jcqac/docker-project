@@ -34,9 +34,6 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 	#Install SQL Server community edition
 	WORKDIR /opt
 	RUN DEBIAN_FRONTEND=noninteractive dpkg -R --install mysql/
-
-	#Copy config over
-	COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 	
 	WORKDIR /opt/mysql
 	
