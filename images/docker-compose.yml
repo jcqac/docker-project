@@ -1,21 +1,16 @@
 #version: '2'
-
 services:
- java:
-  build: ./java/
-  tty: true
-
- mysql-base:
-  build: ./mysql-base/
-  tty: true
-
  jenkins:
   build: ./jenkins/
   ports:
    - "8080:8080"
   tty: true
-  links:
-   - java
+
+ mysql-jira:
+  build: ./mysql-jira/
+  ports:
+   - "3306:3306"
+  tty: true
 
  jira:
   build: ./jira/
@@ -23,39 +18,25 @@ services:
    - "8081:8080"
   tty: true
   links:
-   - java
-
- mysql-jira:
-  build: ./mysql-jira/
-  ports:
-   - "3306:3306"
-  tty: true
-  links:
-   - mysql-base
+   - mysql-jira
  
  nexus:
   build: ./nexus/
   ports: 
    - "8082:8081" 
   tty: true
-  links:
-   - java
 
  tomcat:
   build: ./tomcat/
   ports:
    - "8083:8080"
   tty: true
-  links:
-   - java
 
  zabbix:
   build: ./zabbix/
   ports:
    - "80:80"
   tty: true
-  links:
-   - mysql-base
 
  postfix:
   build: ./postfix/
@@ -68,4 +49,3 @@ services:
    - "993:993"
    - "995:995"
   tty: true
-
