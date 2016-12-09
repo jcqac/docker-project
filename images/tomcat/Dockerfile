@@ -25,8 +25,6 @@ RUN useradd -s /sbin/nologin -g tomcat -d ${CATALINA_HOME}/ tomcat
 
 #update permissions of tomcat & folder ownership
 WORKDIR ${CATALINA_HOME}
-RUN rm -rf logs/
-RUN mkdir logs/
 RUN	chown -R tomcat:tomcat ${CATALINA_HOME}
 RUN chmod -R 755 ${CATALINA_HOME}
 RUN chown -R tomcat:tomcat webapps/ temp/ logs/ work/ conf/
@@ -55,8 +53,8 @@ RUN chmod ug+x *.sh
 RUN sed -i '22i <role rolename="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
 RUN sed -i '23i <user username="tomcat" password="T0mc4t" roles="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
 
-#Run tomcat as the user tomcat
-USER tomcat
+#Run tomcat as the user tomcat # cannot do this, complains about permission, running as root for now.
+#USER tomcat
 RUN service tomcat start
 
 #Expose TomCat ports
