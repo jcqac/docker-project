@@ -40,9 +40,12 @@ RUN chmod ug+x *.sh
 	#Copy init script
 	COPY ./tomcat /etc/init.d
 	
-	#Set permissions of init.d tomcat
-	RUN chmod 755 /etc/init.d/tomcat
+	#update init script $CATALINA_HOME
 	WORKDIR /etc/init.d
+	sed -i '/CATALINA_HOME=pathhere/c\CATALINA_HOME=${CATALINA_HOME}' ./tomcat
+	
+	#Set permissions of init.d tomcat
+	RUN chmod 755 ./tomcat
 	RUN update-rc.d tomcat defaults
 	
 	#Run tomcat as the user tomcat
