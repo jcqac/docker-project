@@ -8,9 +8,8 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 RUN	echo postfix postfix/main_mailer_type        select  Internet Site | debconf-set-selections;\
 		echo postfix postfix/mailname        string  jcqac.qac.local | debconf-set-selections; 
 
-#Install postfix silently		
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postfix
-		
+#Install postfix silently	
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y postfix
 		
 #Expose mail server port, 25; 110; 143; 465; 587; 993; 995
 #25 & 465 & 587 for SMTP
