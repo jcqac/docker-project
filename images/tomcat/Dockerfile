@@ -42,7 +42,7 @@ RUN chmod ug+x *.sh
 	
 	#update init script $CATALINA_HOME
 	WORKDIR /etc/init.d
-	sed -i '/CATALINA_HOME=pathhere/c\CATALINA_HOME=${CATALINA_HOME}' ./tomcat
+	RUN sed -i '/CATALINA_HOME=pathhere/c\CATALINA_HOME=${CATALINA_HOME}' ./tomcat
 	
 	#Set permissions of init.d tomcat
 	RUN chmod 755 ./tomcat
