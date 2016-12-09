@@ -9,12 +9,8 @@ ENV mvn_folder apache-maven-3.3.9
 ENV jenkins_installer jenkins_2.7.4_all.deb
 
 #Env global variables for maven
-ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/jvm/bin:/opt/java/jvm/db/bin:/opt/java/jvm/jre/bin:/opt/maven/m2/bin"
-ENV J2SDKDIR="/opt/java/jvm"
-ENV J2REDIR="/opt/java/jvm/jre"
-ENV JAVA_HOME="/opt/java/jvm"
-ENV DERBY_HOME="/opt/java/jvm/db"
-ENV M2_HOME="/opt/maven/m2"
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/${java_folder}/bin:/opt/java/${java_folder}/db/bin:/opt/java/${java_folder}/jre/bin:/opt/maven/${mvn_folder}/bin"
+ENV M2_HOME="/opt/maven/${mvn_folder}"
 
 # Dependencies Start ~~
 
@@ -44,15 +40,8 @@ ENV M2_HOME="/opt/maven/m2"
 	WORKDIR /opt/maven
 	RUN tar -xvzf ${mvn_archive}
 	
-	RUN mv ./${mvn_folder} ./m2
-	
-	RUN update-alternatives --install /usr/bin/mvn mvn /opt/maven/m2/bin/mvn 100
+	RUN update-alternatives --install /usr/bin/mvn mvn /opt/maven/${mvn_folder}/bin/mvn 100
 	RUN update-alternatives --display mvn
-	
-	#set environment variables
-	COPY ./environment /etc/
-	RUN chown root:root /etc/environment
-	RUN chmod 644 /etc/environment
 
 # Dependencies end ~~
 

@@ -6,14 +6,13 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 
 #Dependencies Start ~~
 	#Setup required folders
-	RUN mkdir /opt/atlassian/
-	RUN mkdir /opt/atlassian/jira
+	RUN mkdir /opt/jira
 
 	#Copy JIRA installer
-	COPY ./${jira_installer} /opt/atlassian/jira
+	COPY ./${jira_installer} /opt/jira
 	
 	#Copy Answer File
-	COPY response.varfile /opt/atlassian/jira
+	COPY response.varfile /opt/jira
 	
 	#Assign file permissions
 	WORKDIR /opt/atlassian/jira
@@ -25,7 +24,7 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 #Setup Jira ~~
 	#Setup Jira
 	WORKDIR /opt/atlassian/jira
-	RUN ./${jira_installer} -q -varfile /opt/atlassian/jira/response.varfile
+	RUN ./${jira_installer} -q -varfile /opt/jira/response.varfile
 
 #Setup Jira end ~~
 

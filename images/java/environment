@@ -1,5 +1,0 @@
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/jvm/bin:/opt/java/jvm/db/bin:/opt/java/jvm/jre/bin"
-J2SDKDIR="/opt/java/jvm"
-J2REDIR="/opt/java/jvm/jre"
-JAVA_HOME="/opt/java/jvm"
-DERBY_HOME="/opt/java/jvm/db"

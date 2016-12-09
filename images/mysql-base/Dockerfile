@@ -45,5 +45,5 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 #Expose MySQL port
 EXPOSE 3306
 
-ENTRYPOINT service mysql start && bash
+#ENTRYPOINT service mysql start && bash
 
