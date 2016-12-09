@@ -28,9 +28,7 @@ WORKDIR ${CATALINA_HOME}
 RUN rm -rf logs/
 RUN mkdir logs/
 RUN	chown -R tomcat:tomcat ${CATALINA_HOME}
-RUN chmod -R 755 ${CATALINA_HOME}
-RUN chown -R tomcat:tomcat webapps/ temp/ logs/ work/ conf/
-RUN chmod -R 755 webapps/ temp/ logs/ work/ conf/
+RUN chmod -R 777 ${CATALINA_HOME}
 
 #update permissions of tomcat shell scripts
 WORKDIR ${CATALINA_HOME}/bin
@@ -58,7 +56,7 @@ RUN chmod ug+x *.sh
 # Create tomcat manager login
 RUN sed -i '22i <role rolename="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
 RUN sed -i '23i <user username="tomcat" password="T0mc4t" roles="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
-
+RUN chmod -R 755 ${CATALINA_HOME}
 #Expose TomCat ports
 EXPOSE 8080
 
