@@ -15,7 +15,7 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 	COPY response.varfile /opt/jira
 	
 	#Assign file permissions
-	WORKDIR /opt/atlassian/jira
+	WORKDIR /opt/jira
 	RUN chmod a+x ./${jira_installer}
 	RUN chmod 777 ./response.varfile	
 	
