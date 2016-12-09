@@ -15,7 +15,7 @@ ENV CATALINA_HOME /opt/${tcat_folder}
 	
 #Create Tomcat group and user
 RUN groupadd tomcat
-RUN useradd -s /sbin/nologin -g tomcat -d /opt/tomcat/ tomcat
+RUN useradd -s /sbin/nologin -g tomcat -d /opt/${tcat_folder}/ tomcat
 
 #Setup TomCat ~~
 	#Setup TomCat
