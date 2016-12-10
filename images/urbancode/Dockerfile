@@ -20,7 +20,7 @@ ENV JAVA_HOME /usr/java/{java_folder}
 	
 	#install unzip
 	RUN yum check-update
-	RUN yum install unzip
+	RUN yum install -y unzip
 #Dependencies End ~~
 
 ##Setup ucd user
