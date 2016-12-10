@@ -49,3 +49,11 @@ services:
    - "993:993"
    - "995:995"
   tty: true
+  
+ urbancode:
+  build: ./urbancode/
+  ports:
+   - "7918:7918"
+   - "8084:8080"
+   - "8443:8443"
+  tty: true

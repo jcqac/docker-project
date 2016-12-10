@@ -26,7 +26,7 @@ ENV JAVA_HOME /usr/java/{java_folder}
 #Setup begin ~~
 	#Setup Java
 		WORKDIR /opt
-		RUN rpm -ivh {java_archive}
+		RUN rpm -ivh ${java_archive}
 	#Java end
 	
 	#Setup IBM UCD
