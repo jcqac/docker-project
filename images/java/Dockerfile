@@ -13,16 +13,17 @@ ENV JAVA_HOME="/opt/java/${java_folder}"
 ENV DERBY_HOME="/opt/java/${java_folder}/db"
 
 #Setup required folders
-RUN mkdir /opt/java
+	RUN mkdir /opt/java
 
 #Copy Require Binary
-COPY ./${java_archive} /opt/java
+	COPY ./${java_archive} /opt/java
 
 #Setup Java
-WORKDIR /opt/java
-RUN tar -xvzf ${java_archive}
+	WORKDIR /opt/java
+	RUN tar -xvzf ${java_archive}
 
-RUN update-alternatives --install /usr/bin/java java /opt/java/${java_folder}/bin/java 100
-RUN update-alternatives --install /usr/bin/javac javac /opt/java/${java_folder}/bin/javac 100
+	RUN update-alternatives --install /usr/bin/java java /opt/java/${java_folder}/bin/java 100
+	RUN update-alternatives --install /usr/bin/javac javac /opt/java/${java_folder}/bin/javac 100
 
-RUN update-alternatives --display java
+	RUN update-alternatives --display java
+#Setup java end

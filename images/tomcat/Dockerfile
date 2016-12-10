@@ -23,39 +23,39 @@ RUN useradd -s /sbin/nologin -g tomcat -d ${CATALINA_HOME}/ tomcat
 	RUN chown tomcat:tomcat ${tcat_archive}
 	RUN tar -xvzf ${tcat_archive}
 
-#update permissions of tomcat & folder ownership
-WORKDIR ${CATALINA_HOME}
-RUN	chown -R tomcat:tomcat ${CATALINA_HOME}
-RUN chmod -R 755 ${CATALINA_HOME}
-RUN chown -R tomcat:tomcat webapps/ temp/ logs/ work/ conf/
-RUN chmod -R 755 webapps/ temp/ logs/ work/ conf/
+	#update permissions of tomcat & folder ownership
+		WORKDIR ${CATALINA_HOME}
+		RUN	chown -R tomcat:tomcat ${CATALINA_HOME}
+		RUN chmod -R 755 ${CATALINA_HOME}
+		RUN chown -R tomcat:tomcat webapps/ temp/ logs/ work/ conf/
+		RUN chmod -R 755 webapps/ temp/ logs/ work/ conf/
 
-#update permissions of tomcat shell scripts
-WORKDIR ${CATALINA_HOME}/bin
-RUN chmod ug+x *.sh
+	#update permissions of tomcat shell scripts
+		WORKDIR ${CATALINA_HOME}/bin
+		RUN chmod ug+x *.sh
 
-# Install tomcat as a Service init.d
-	#Copy init script
-	COPY ./tomcat /etc/init.d
+	# Install tomcat as a Service init.d
+		#Copy init script
+		COPY ./tomcat /etc/init.d
 	
 	#update init script $CATALINA_HOME
-	WORKDIR /etc/init.d
-	RUN sed -i "/CATALINA_HOME=pathhere/c\CATALINA_HOME=${CATALINA_HOME}" ./tomcat
+		WORKDIR /etc/init.d
+		RUN sed -i "/CATALINA_HOME=pathhere/c\CATALINA_HOME=${CATALINA_HOME}" ./tomcat
 	
 	#Set permissions of init.d tomcat
-	RUN chmod 755 ./tomcat
-	RUN update-rc.d tomcat defaults
+		RUN chmod 755 ./tomcat
+		RUN update-rc.d tomcat defaults
 		
-# tomcat as a service end
+	# tomcat as a service end
 #Setup TomCat end ~~
 
 # Create tomcat manager login
-RUN sed -i '22i <role rolename="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
-RUN sed -i '23i <user username="tomcat" password="T0mc4t" roles="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
+	RUN sed -i '22i <role rolename="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
+	RUN sed -i '23i <user username="tomcat" password="T0mc4t" roles="manager-gui"/>' ${CATALINA_HOME}/conf/tomcat-users.xml
 
 #Run tomcat as the user tomcat # cannot do this, complains about permission, running as root for now.
 #USER tomcat
-RUN service tomcat start
+	RUN service tomcat start
 
 #Expose TomCat ports
 EXPOSE 8080

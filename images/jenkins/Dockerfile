@@ -13,7 +13,6 @@ ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/game
 ENV M2_HOME="/opt/maven/${mvn_folder}"
 
 # Dependencies Start ~~
-
 	#Setup required folders
 	RUN mkdir /opt/maven
 
@@ -42,7 +41,6 @@ ENV M2_HOME="/opt/maven/${mvn_folder}"
 	
 	RUN update-alternatives --install /usr/bin/mvn mvn /opt/maven/${mvn_folder}/bin/mvn 100
 	RUN update-alternatives --display mvn
-
 # Dependencies end ~~
 
 # Install Jenkins start ~~
@@ -54,7 +52,6 @@ ENV M2_HOME="/opt/maven/${mvn_folder}"
 	
 	#Install Jenkins
 	RUN dpkg -i ${jenkins_installer}
-	
 # Install Jenkins end ~~
 	
 #Expose Jenkins' port
@@ -62,4 +59,3 @@ EXPOSE 8080
 	
 #Run jenkins on start
 ENTRYPOINT service jenkins start && bash
-	

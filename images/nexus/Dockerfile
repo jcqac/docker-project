@@ -21,17 +21,17 @@ ENV NEXUS_HOME /opt/${nex_folder}
 #Setup Nexus end ~~
 
 ##Setup Nexus user
-RUN groupadd nexus
-RUN useradd -s /sbin/nologin -g nexus -M nexus
+	RUN groupadd nexus
+	RUN useradd -s /sbin/nologin -g nexus -M nexus
 	
 #update permissions of nexus & folder ownership
-WORKDIR opt/nexus/bin
-RUN	chown -R nexus:nexus /opt/${nex_folder}
-RUN chown -R nexus:nexus /opt/sonatype-work
-RUN chmod a+x /opt/${nex_folder}/bin/nexus
+	WORKDIR opt/nexus/bin
+	RUN	chown -R nexus:nexus /opt/${nex_folder}
+	RUN chown -R nexus:nexus /opt/sonatype-work
+	RUN chmod a+x /opt/${nex_folder}/bin/nexus
 
 #Set run_as_user in nexus.rc
-RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/${nex_folder}/bin/nexus.rc"
+	RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/${nex_folder}/bin/nexus.rc"
 	
 # Install Nexus as a Service init.d
 	RUN ln -s ${NEXUS_HOME}/bin/nexus /etc/init.d/nexus

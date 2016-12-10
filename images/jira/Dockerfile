@@ -24,12 +24,11 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 #Setup Jira ~~
 	#Setup Jira
 	RUN ./${jira_installer} -q -varfile /opt/jira/response.varfile
-
 #Setup Jira end ~~
 
 #Expose Jira ports
-EXPOSE 8082
-EXPOSE 8007
+EXPOSE 8080
+EXPOSE 8005
 
 #Run JIRA on entry
 ENTRYPOINT service jira start && bash
