@@ -50,13 +50,13 @@ ENV JAVA_HOME /usr/java/{java_folder}
 	#Setup IBM UCD end
 	
 	#Update /opt/ibm-ucd/bin/init/server user and group
+		WORKDIR opt/${ucd_folder}/bin/init/
 		RUN sed -i '/SERVER_USER=@SERVER_USER@/c\SERVER_USER="ibmucd"' server &&\
 		sed -i '/SERVER_GROUP=@SERVER_GROUP@/c\SERVER_GROUP="ibmucd"' server
 	#Update end
 #Setup end ~~
 
 #update permissions of ibm ucd & folder ownership
-	WORKDIR opt/${ucd_folder}/bin
 	RUN	chown -R ibmucd:ibmucd /opt/${ucd_folder}
 	RUN chmod a+x /opt/${ucd_folder}/bin/init/server
 #Update end
