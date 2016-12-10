@@ -39,7 +39,7 @@ ENV JAVA_HOME /usr/java/{java_folder}
 		WORKDIR /opt/${ucd_exfolder}
 	#modify install.properties to specify silent install
 		RUN /bin/bash -c "echo nonInteractive=true >> install.properties"\
-		&&	/bin/bash -c "eco install.java.home=${JAVA_HOME} >> install.properties"\
+		&&	/bin/bash -c "echo install.java.home=${JAVA_HOME} >> install.properties"\
 		&&	/bin/bash -c "echo install.server.web.host=jcucd.qac.local >> install.properties"\
 		&&	/bin/bash -c "echo install.server.web.https.port=8443 >> install.properties"\
 		&&	/bin/bash -c "echo install.server.web.port=8080 >> install.properties"\
