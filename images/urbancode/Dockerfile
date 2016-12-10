@@ -50,8 +50,8 @@ ENV JAVA_HOME /usr/java/{java_folder}
 	#Setup IBM UCD end
 	
 	#Update /opt/ibm-ucd/bin/init/server user and group
-		RUN sed -i '/SERVER_USER=@SERVER_USER@/c\SERVER_USER="ibmucd"' zabbix_server.conf &&\
-		sed -i '/SERVER_GROUP=@SERVER_GROUP@/c\SERVER_GROUP="ibmucd"' zabbix_server.conf
+		RUN sed -i '/SERVER_USER=@SERVER_USER@/c\SERVER_USER="ibmucd"' server &&\
+		sed -i '/SERVER_GROUP=@SERVER_GROUP@/c\SERVER_GROUP="ibmucd"' server
 	#Update end
 #Setup end ~~
 
