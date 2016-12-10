@@ -17,6 +17,10 @@ ENV JAVA_HOME /usr/java/{java_folder}
 	#Copy required files
 	COPY ./${ucd_archive} /opt
 	COPY ./${java_archive} /opt
+	
+	#install unzip
+	RUN yum check-update
+	RUN yum install unzip
 #Dependencies End ~~
 
 ##Setup ucd user
