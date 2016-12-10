@@ -37,14 +37,10 @@ ENV JAVA_HOME /usr/java/{java_folder}
 		#Extract IBM archive
 		RUN unzip ${ucd_archive}
 		WORKDIR /opt/${ucd_exfolder}
-	#modify install.properties to specify silent install
-		RUN /bin/bash -c "echo nonInteractive=true >> install.properties"\
-		&&	/bin/bash -c "echo install.java.home=${JAVA_HOME} >> install.properties"\
-		&&	/bin/bash -c "echo install.server.web.host=jcucd.qac.local >> install.properties"\
-		&&	/bin/bash -c "echo install.server.web.https.port=8443 >> install.properties"\
-		&&	/bin/bash -c "echo install.server.web.port=8080 >> install.properties"\
-		&&	/bin/bash -c "echo install.server.web.ip=0.0.0.0 >> install.properties"\
-		&&	/bin/bash -c "echo server.initial.password=admin >> install.properties"
+	# Copy and modify install.properties to specify silent install
+		COPY ./install.properties /opt/${ucd_exfolder}
+		RUN sed -i '/install.java.home=path/c\install.java.home=${JAVA_HOME}' install.properties
+		
 	#run install.sh
 		RUN ./install-server.sh
 	#Setup IBM UCD end
