@@ -39,12 +39,15 @@ ENV JAVA_HOME /usr/java/${java_folder}
 		WORKDIR /opt/${ucd_exfolder}
 	# Copy and modify install.properties to specify silent install
 		COPY ./install.properties /opt/${ucd_exfolder}
-		RUN chmod a+x /opt/${ucd_exfolder}/install.properties
 		RUN sed -i "/install.java.home=path/c\install.java.home=${JAVA_HOME}" install.properties
-		
+	
+	#For version 6.2.2 - workaround for hanging silent install
+		RUN touch workaround.txt
+		RUN /bin/bash -c "echo '\"\"' > ./workaround.txt"
+		RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/${nex_folder}/bin/nexus.rc"
 	#run install.sh
-		RUN chmod a+x ./install-server.sh
-		RUN ./install-server.sh
+		#RUN ./install-server.sh
+		RUN /bin/bash -c "./install-server.sh < ./workaround.txt"
 	#Setup IBM UCD end
 	
 	#Update /opt/ibm-ucd/bin/init/server user and group
