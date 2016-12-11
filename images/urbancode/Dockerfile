@@ -42,11 +42,11 @@ ENV JAVA_HOME /usr/java/${java_folder}
 		RUN sed -i "/install.java.home=path/c\install.java.home=${JAVA_HOME}" install.properties
 	
 	#For version 6.2.2 - workaround for hanging silent install
-		RUN touch workaround.txt
-		RUN /bin/bash -c "echo '\"\"' > ./workaround.txt"
+		RUN touch answerfile.txt
+		RUN /bin/bash -c "echo '\"\"' > answerfile.txt"
 	#run install.sh
 		#RUN ./install-server.sh
-		RUN /bin/bash -c "./install-server.sh < ./workaround.txt"
+		RUN /bin/bash -c "./install-server.sh < answerfile.txt"
 	#Setup IBM UCD end
 	
 	#Update /opt/ibm-ucd/bin/init/server user and group
