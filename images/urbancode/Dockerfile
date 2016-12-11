@@ -11,7 +11,7 @@ ENV java_archive jdk-8u112-linux-x64.rpm
 ENV java_folder jdk1.8.0_112
 
 #Global Env values
-ENV JAVA_HOME /usr/java/{java_folder}
+ENV JAVA_HOME /usr/java/${java_folder}
 
 #Dependencies Start ~~
 	#Copy required files
@@ -40,8 +40,7 @@ ENV JAVA_HOME /usr/java/{java_folder}
 	# Copy and modify install.properties to specify silent install
 		COPY ./install.properties /opt/${ucd_exfolder}
 		
-		RUN export JAVA_HOME=${JAVA_HOME}\
-		&& sed -i "/install.java.home=path/c\install.java.home=$JAVA_HOME" install.properties
+		RUN sed -i "/install.java.home=path/c\install.java.home=${JAVA_HOME}" install.properties
 		
 	#run install.sh
 		RUN ./install-server.sh
