@@ -44,7 +44,6 @@ ENV JAVA_HOME /usr/java/${java_folder}
 	#For version 6.2.2 - workaround for hanging silent install
 		RUN touch workaround.txt
 		RUN /bin/bash -c "echo '\"\"' > ./workaround.txt"
-		RUN /bin/bash -c "echo run_as_user='\"nexus\"' > /opt/${nex_folder}/bin/nexus.rc"
 	#run install.sh
 		#RUN ./install-server.sh
 		RUN /bin/bash -c "./install-server.sh < ./workaround.txt"
