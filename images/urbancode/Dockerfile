@@ -39,10 +39,11 @@ ENV JAVA_HOME /usr/java/${java_folder}
 		WORKDIR /opt/${ucd_exfolder}
 	# Copy and modify install.properties to specify silent install
 		COPY ./install.properties /opt/${ucd_exfolder}
-		
+		RUN chmod a+x /opt/${ucd_exfolder}/install.properties
 		RUN sed -i "/install.java.home=path/c\install.java.home=${JAVA_HOME}" install.properties
 		
 	#run install.sh
+		RUN chmod a+x ./install-server.sh
 		RUN ./install-server.sh
 	#Setup IBM UCD end
 	
