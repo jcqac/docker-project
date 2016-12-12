@@ -8,7 +8,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	COPY ./post_install.sql /opt/mysql/
 	
 	#Helper checks if volume already has SQL data, if it does then execution of SQL statement is not neccessary.
-	COPY ./helper.sh
+	COPY ./helper.sh /opt/mysql/
 	
 #Dependencies End ~~
 
