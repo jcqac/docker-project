@@ -31,4 +31,3 @@ EXPOSE 8080 8005
 
 #Run JIRA on entry
 ENTRYPOINT service jira start && bash
-

@@ -6,7 +6,7 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 
 #Preseed Answers for Postfix
 RUN	echo postfix postfix/main_mailer_type        select  Internet Site | debconf-set-selections;\
-		echo postfix postfix/mailname        string  jcqac.qac.local | debconf-set-selections; 
+	echo postfix postfix/mailname        string  jcqac.qac.local | debconf-set-selections; 
 
 #Install postfix silently	
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y postfix

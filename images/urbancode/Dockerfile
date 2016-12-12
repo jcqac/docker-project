@@ -51,7 +51,7 @@ ENV JAVA_HOME /usr/java/${java_folder}
 	
 	#Update /opt/ibm-ucd/bin/init/server user and group
 		RUN sed -i '/SERVER_USER=@SERVER_USER@/c\SERVER_USER="ibmucd"' /opt/${ucd_folder}/bin/init/server &&\
-		sed -i '/SERVER_GROUP=@SERVER_GROUP@/c\SERVER_GROUP="ibmucd"' /opt/${ucd_folder}/bin/init/server
+			sed -i '/SERVER_GROUP=@SERVER_GROUP@/c\SERVER_GROUP="ibmucd"' /opt/${ucd_folder}/bin/init/server
 	#Update end
 #Setup end ~~
 
@@ -73,8 +73,6 @@ ENV JAVA_HOME /usr/java/${java_folder}
 # IBM UCD as a service end
 	
 #Expose IBM ports
-EXPOSE 7918
-EXPOSE 8080
-EXPOSE 8443
+EXPOSE 7918 8080 8443
 
 ENTRYPOINT service ucdserver start && bash
