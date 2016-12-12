@@ -9,6 +9,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 	#Helper checks if volume already has SQL data, if it does then execution of SQL statement is not neccessary.
 	COPY ./helper.sh /opt/mysql/
+	RUN chmod a+x ./helper.sh
 	
 #Dependencies End ~~
 
