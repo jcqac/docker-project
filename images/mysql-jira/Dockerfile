@@ -5,7 +5,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	RUN mkdir /opt/mysql/tmp
 
 	#Copy required files
-	COPY ./post_install.sql /opt/mysql/
+	COPY ./post_install.sql /opt/mysql/tmp
 	
 	#Helper checks if volume already has SQL data, if it does then execution of SQL statement is not neccessary.
 	COPY ./helper.sh /opt/mysql/
