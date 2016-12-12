@@ -6,17 +6,17 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 
 	#Copy required files
 	COPY ./post_install.sql /opt/mysql/tmp
+	
+	#Helper checks if volume already has SQL data, if it does then execution of SQL statement is not neccessary.
+	COPY ./helper.sh /opt/mysql/
+	RUN chmod a+x ./helper.sh
+	
 #Dependencies End ~~
 
 #Setup MySQL Tables and Users~~
 	
 	#Execute SQL statement to setup accounts and relavent tables.
 	WORKDIR /opt/mysql/tmp
-	
-	RUN service mysql start &&\
-	mysql -sfu root --password=root < "post_install.sql" &&\
-	rm -rf /opt/mysql/tmp
-	
 	WORKDIR /opt/mysql
 	
 #Setup MySQL end ~~
@@ -24,4 +24,4 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 #Expose MySQL port
 EXPOSE 3306
 
-ENTRYPOINT service mysql start && bash
+ENTRYPOINT ./helper.sh && rm -rf /opt/mysql/tmp/ && bash

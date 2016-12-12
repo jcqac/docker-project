@@ -50,10 +50,18 @@ services:
    - "995:995"
   tty: true
   
- urbancode:
-  build: ./urbancode/
+ mysql-jira-vol-test:
+  build: .mysql-jira-vol-test/
   ports:
-   - "7918:7918"
-   - "8084:8080"
-   - "8443:8443"
+   - "3307:3306"
   tty: true
+  volumes:
+   - /opt/docker-vol/jira/mysql:/var/lib/mysql
+   
+ # urbancode:
+  # build: ./urbancode/
+  # ports:
+   # - "7918:7918"
+   # - "8084:8080"
+   # - "8443:8443"
+  # tty: true
