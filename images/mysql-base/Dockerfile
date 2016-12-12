@@ -4,6 +4,9 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 #Env value for mysql installer
 ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 
+#expose volume to host
+VOLUME /var/lib/mysql
+
 #Dependencies Start ~~
 	#Setup required folders
 	RUN mkdir /opt/mysql
@@ -32,6 +35,7 @@ ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 	WORKDIR /opt/mysql
 
 #Setup MySQL end ~~
+
 
 #Expose MySQL port
 EXPOSE 3306

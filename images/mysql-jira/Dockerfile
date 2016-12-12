@@ -21,8 +21,6 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 	
 #Setup MySQL end ~~
 
-VOLUME /var/lib/mysql
-
 #Expose MySQL port
 EXPOSE 3306
 
