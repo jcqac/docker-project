@@ -27,8 +27,7 @@ ENV jira_installer atlassian-jira-software-7.2.4-x64.bin
 #Setup Jira end ~~
 
 #Expose Jira ports
-EXPOSE 8080
-EXPOSE 8005
+EXPOSE 8080 8005
 
 #Run JIRA on entry
 ENTRYPOINT service jira start && bash

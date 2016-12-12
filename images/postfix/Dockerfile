@@ -10,19 +10,12 @@ RUN	echo postfix postfix/main_mailer_type        select  Internet Site | debconf
 
 #Install postfix silently	
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y postfix
-		
+
 #Expose mail server port, 25; 110; 143; 465; 587; 993; 995
 #25 & 465 & 587 for SMTP
 #143 & 993 for IMAP
 #110 & 995 for POP3
 
-EXPOSE 25
-EXPOSE 110
-EXPOSE 143
-EXPOSE 465
-EXPOSE 587
-EXPOSE 993
-EXPOSE 995
+EXPOSE 25 110 143 465 587 993 995
 
 ENTRYPOINT service postfix start && bash
-

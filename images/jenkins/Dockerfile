@@ -18,27 +18,16 @@ ENV M2_HOME="/opt/maven/${mvn_folder}"
 
 	#Copy Require Binary
 	COPY ./${mvn_archive} /opt/maven
-	
+
+	#install dependencies: daemon, psmisc, net-tools, openjdk-8-jre-headless(Jenkins complains otherwise)
 	#install apt-utils
 	RUN apt-get update
-	#RUN apt-get install -y apt-utils
-	
-	#install daemon
-	RUN apt-get install -y daemon
-	
-	#install psmisc
-	RUN apt-get install -y psmisc
-	
-	#install net-tools
-	RUN apt-get install -y net-tools
-	
-	#Setup Java (JRE 7)
-	RUN apt-get install -y openjdk-8-jre-headless
+	RUN apt-get install -y daemon psmisc net-tools openjdk-8-jre-headless
 
 	#Setup Maven
 	WORKDIR /opt/maven
 	RUN tar -xvzf ${mvn_archive}
-	
+
 	RUN update-alternatives --install /usr/bin/mvn mvn /opt/maven/${mvn_folder}/bin/mvn 100
 	RUN update-alternatives --display mvn
 # Dependencies end ~~
@@ -49,7 +38,7 @@ ENV M2_HOME="/opt/maven/${mvn_folder}"
 	
 	#Copy Jenkins installer
 	COPY ./${jenkins_installer} /opt/jenkins
-	
+
 	#Install Jenkins
 	RUN dpkg -i ${jenkins_installer}
 # Install Jenkins end ~~

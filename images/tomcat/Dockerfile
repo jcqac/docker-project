@@ -12,7 +12,7 @@ ENV CATALINA_HOME /opt/${tcat_folder}
 	#Copy required files
 	COPY ./${tcat_archive} /opt
 #Dependencies End ~~
-	
+
 #Create Tomcat group and user
 RUN groupadd tomcat
 RUN useradd -s /sbin/nologin -g tomcat -d ${CATALINA_HOME}/ tomcat
@@ -37,15 +37,15 @@ RUN useradd -s /sbin/nologin -g tomcat -d ${CATALINA_HOME}/ tomcat
 	# Install tomcat as a Service init.d
 		#Copy init script
 		COPY ./tomcat /etc/init.d
-	
+
 	#update init script $CATALINA_HOME
 		WORKDIR /etc/init.d
 		RUN sed -i "/CATALINA_HOME=pathhere/c\CATALINA_HOME=${CATALINA_HOME}" ./tomcat
-	
+
 	#Set permissions of init.d tomcat
 		RUN chmod 755 ./tomcat
 		RUN update-rc.d tomcat defaults
-		
+
 	# tomcat as a service end
 #Setup TomCat end ~~
 
