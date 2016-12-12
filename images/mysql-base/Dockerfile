@@ -5,7 +5,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 ENV mysql_installer mysql-server_5.7.16-1ubuntu16.04_amd64.deb-bundle.tar
 
 #expose volume to host
-VOLUME /var/lib/mysql
+#VOLUME /var/lib/mysql
 
 #Dependencies Start ~~
 	#Setup required folders
