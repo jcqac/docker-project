@@ -23,7 +23,7 @@ MAINTAINER Johnny Che <johnny.che@qa.com>
 #Expose MySQL port
 EXPOSE 3306
 
-ENTRYPOINT\
+ENTRYPOINT \
 chown mysql /var/lib/mysql\
 && chgrp mysql /var/lib/mysql\ 
 && ./helper.sh
