@@ -51,7 +51,7 @@ services:
   tty: true
   
  mysql-jira-vol-test:
-  build: .mysql-jira-vol-test/
+  build: ./mysql-jira-vol-test/
   ports:
    - "3307:3306"
   tty: true
