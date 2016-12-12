@@ -6,6 +6,7 @@ ENV java_archive jdk-8u112-linux-x64.tar.gz
 ENV java_folder jdk1.8.0_112
 
 #Mount Binaries Folder
+RUN mkdir /tmp/binaries
 VOLUME /opt/binaries /tmp/binaries
 
 #Global ENV for Java e.g. JAVA_HOME
