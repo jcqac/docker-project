@@ -36,7 +36,6 @@ VOLUME /var/lib/mysql
 
 #Setup MySQL end ~~
 
-
 #Expose MySQL port
 EXPOSE 3306
 
